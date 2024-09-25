@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import Divider from '@mui/material/Divider';
 
 
 
@@ -87,31 +88,195 @@ const Header = () => {
                 <FaBell />
               </Button>&nbsp;&nbsp;&nbsp;&nbsp;
               <Menu
-                className='notification'
+                className='notification dropdown-list'
                 id="notification"
                 open={openNotification}
                 onClose={handleClosenotificationsDrop}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+               slotProps={{
+                            paper: {
+                            elevation: 0,
+                            sx: {
+                                maxHeight: 300, // Set the max height to allow scrolling
+                                overflowY: 'auto', // Enable vertical scrolling
+                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                mt: 1.5,
+                                '& .MuiAvatar-root': {
+                                width: 32,
+                                height: 32,
+                                ml: -0.5,
+                                mr: 1,
+                                },
+                                '&::before': {
+                                content: '""',
+                                display: 'block',
+                                position: 'absolute',
+                                top: 0,
+                                right: 14,
+                                width: 10,
+                                height: 10,
+                                bgcolor: 'background.paper',
+                                transform: 'translateY(-50%) rotate(45deg)',
+                                zIndex: 0,
+                                },
+                            },
+                            },
+                        }}
+        
               >
+                <div className='head pl-3 pb-0'>
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;Order (12)</h4>
+                </div>
+                <Divider className='mb-3' />
                 <MenuItem onClick={handleClosenotificationsDrop}>
-                  <ListItemIcon>
-                    <PersonAdd />
-                  </ListItemIcon>
-                  My Notification
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
                 </MenuItem>
                 <MenuItem onClick={handleClosenotificationsDrop}>
-                  <ListItemIcon>
-                    <Settings />
-                  </ListItemIcon>
-                  Reset Password
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
                 </MenuItem>
                 <MenuItem onClick={handleClosenotificationsDrop}>
-                  <ListItemIcon>
-                    <Logout />
-                  </ListItemIcon>
-                  Logout
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
                 </MenuItem>
+                <MenuItem onClick={handleClosenotificationsDrop}>
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
+                </MenuItem>
+                <MenuItem onClick={handleClosenotificationsDrop}>
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
+                </MenuItem>
+                <MenuItem onClick={handleClosenotificationsDrop}>
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
+                </MenuItem>
+                <MenuItem onClick={handleClosenotificationsDrop}>
+                  <div className='d-flex'>
+                    <div>
+                        <div className='userImg'>
+                        <span className='rounded-circle'>
+                            <img src={chandi} alt="chandi"/>
+                        </span>
+                  </div>
+                    </div>
+                  <div className='dropdownInfo'>
+                    <h4>
+                        <span>
+                            <b>Chandika </b>
+                            added to his favourite list
+                            <b> Leather belt steven madden</b> 
+                        </span>
+                    </h4>
+                    <p className='text-sky mb-0'>few seconds ago</p>
+                  </div>
+                  </div>
+                </MenuItem>
+                
               </Menu>
               </div>
 

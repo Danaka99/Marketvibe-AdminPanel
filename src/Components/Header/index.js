@@ -11,6 +11,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
 import chandi from "../../assests/chandi.jpg"
+import rash from "../../assests/IMG_9849.jpg"
 import { TbWorld } from "react-icons/tb";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -94,11 +95,11 @@ const Header = () => {
                 onClose={handleClosenotificationsDrop}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-               slotProps={{
+                slotProps={{
                             paper: {
                             elevation: 0,
                             sx: {
-                                maxHeight: 300, // Set the max height to allow scrolling
+                                maxHeight: 400, // Set the max height to allow scrolling
                                 overflowY: 'auto', // Enable vertical scrolling
                                 filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                 mt: 1.5,
@@ -129,6 +130,7 @@ const Header = () => {
                     <h4>&nbsp;&nbsp;&nbsp;&nbsp;Order (12)</h4>
                 </div>
                 <Divider className='mb-3' />
+                <div className='scroll'>
                 <MenuItem onClick={handleClosenotificationsDrop}>
                   <div className='d-flex'>
                     <div>
@@ -176,16 +178,16 @@ const Header = () => {
                     <div>
                         <div className='userImg'>
                         <span className='rounded-circle'>
-                            <img src={chandi} alt="chandi"/>
+                            <img src={rash} alt="chandi"/>
                         </span>
                   </div>
                     </div>
                   <div className='dropdownInfo'>
                     <h4>
                         <span>
-                            <b>Chandika </b>
+                            <b>Rash</b>
                             added to his favourite list
-                            <b> Leather belt steven madden</b> 
+                            <b> Cotton blouse</b> 
                         </span>
                     </h4>
                     <p className='text-sky mb-0'>few seconds ago</p>
@@ -218,16 +220,16 @@ const Header = () => {
                     <div>
                         <div className='userImg'>
                         <span className='rounded-circle'>
-                            <img src={chandi} alt="chandi"/>
+                            <img src={rash} alt="chandi"/>
                         </span>
                   </div>
                     </div>
                   <div className='dropdownInfo'>
                     <h4>
                         <span>
-                            <b>Chandika </b>
+                            <b>Rash</b>
                             added to his favourite list
-                            <b> Leather belt steven madden</b> 
+                            <b> Cotton blouse</b> 
                         </span>
                     </h4>
                     <p className='text-sky mb-0'>few seconds ago</p>
@@ -260,16 +262,16 @@ const Header = () => {
                     <div>
                         <div className='userImg'>
                         <span className='rounded-circle'>
-                            <img src={chandi} alt="chandi"/>
+                            <img src={rash} alt="chandi"/>
                         </span>
                   </div>
                     </div>
                   <div className='dropdownInfo'>
                     <h4>
                         <span>
-                            <b>Chandika </b>
+                            <b>Rash</b>
                             added to his favourite list
-                            <b> Leather belt steven madden</b> 
+                            <b> Cotton blouse</b> 
                         </span>
                     </h4>
                     <p className='text-sky mb-0'>few seconds ago</p>
@@ -277,6 +279,10 @@ const Header = () => {
                   </div>
                 </MenuItem>
                 
+                </div>
+                <div className='pl-3 pr-3 w-100 pt-2 pb-1'>
+                    <Button className='btn-blue w-100'>View all notifications</Button>
+                </div>
               </Menu>
               </div>
 

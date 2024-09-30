@@ -14,6 +14,10 @@ body{
 
 .btn-blue{background: #0858f7 !important; font-size: 14px !important; font-weight: 600; color: #fff !important; text-transform: capitalize !important; border-radius: 5px !important ;}
 
+.btn-lg{padding: 7px 25px !important;}
+
+.btn-round{border-radius: 30px !important;}
+
 header{width: 100%; height: 70px; background: rgba(255,255,255,0.9); position: fixed; top: 0px; left: 0px; z-index: 1000;
   -webkit-backdrop-filter: blur(5px);}
 header .row{margin: 0px !important;}
@@ -26,6 +30,8 @@ header button.rounded-circle{
 }
 header button.rounded-circle svg{color: #292929; font-size: 18px !important;}
 header button.rounded-circle:hover svg{color: #0858f7 !important; transition: all 0 2s ease-in-out;}
+
+header .part2{padding-left: 50px;}
 
 .searchBox{width: 600px; height: 40px; background: #f0f5ff; border-bottom: 6px; padding: 3px 15px;}
 .searchBox input{background: transparent; border: 0px; outline: none; padding-left: 5px; font-size: 14px; color: #292929;}
@@ -198,6 +204,12 @@ table.v-align td .productBox{width: 300px;}
 .tableFooter p{font-size: 14px; font-weight: 500;margin-bottom: 0px;}
 
 .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{background-color: #0858f7 !important;}
+
+
+
+
+
+.loginSection{width: 100%; height: 100vh; padding: 35px 25px;}
 
 
 

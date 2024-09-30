@@ -10,10 +10,12 @@ import {Chart} from "react-google-charts";
 import { FaEye } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Pagination from '@mui/material/Pagination';
 
 
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 
 export const data = [
   ["Year", "Total Sells"],
@@ -38,8 +40,9 @@ const Dashboard = () => {
 
     const [showBy, setShowBy] = useState('');
     const [CategoryBy, setCategoryBy] = useState('');
-     const [brandBy, setBrandBy] = useState('');
-
+    const [brandBy, setBrandBy] = useState('');
+    
+   
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -211,7 +214,7 @@ const Dashboard = () => {
               <thead className="thead-dark">
                   <tr>
                     <th>U_ID</th>
-                    <th>PRODUCT</th>
+                    <th style={{width:'300px'}}>PRODUCT</th>
                     <th>CATEGORY</th>
                     <th>BRAND</th>
                     <th>PRICE</th>
@@ -225,12 +228,278 @@ const Dashboard = () => {
               <tbody>
                   <tr>
                     <td>#1</td>
-                    <td>Tops and skirts set for Female</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
                     <td>women</td>
                     <td>richman</td>
                     <td>
-                      <span className="old">$21.00</span>
-                      <span className="new">$</span>
+                      <div style={{width:'60px'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+                   <tr>
+                    <td>#1</td>
+                    <td>
+                      <div className="d-flex align-items-center productBox">
+                        <div className="imgWrapper">
+                          <div className="img">
+                            <img src="https://mironcoder-hotash.netlify.app/images/product/01.webp" alt="" className="w-100"/>
+                          </div>
+                        </div>
+                        <div className="info">
+                          <h6>Tops and skirt set for Female...</h6>
+                          <p>Women's exclusive summer Tops and skirt set for Female Tops and skirt set</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <div style={{width:'150p'}}>
+                        <del className="old">$21.00</del>
+                        <span className="new text-danger">$21.00</span>
+                      </div>
                     </td>
                     <td>30</td>
                     <td>4.9(16)</td>
@@ -247,6 +516,11 @@ const Dashboard = () => {
                   </tr>
               </tbody>
             </table>
+             <div className="d-flex tableFooter">
+              <p>showing <b>12</b> of <b>60</b> results</p>
+              <Pagination count={100} color="primary" className="pagination"
+              showFirstButton showLastButton/>
+             </div>
           </div>
 
           </div>

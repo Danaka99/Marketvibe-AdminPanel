@@ -10,14 +10,17 @@ import { FaBell } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import { SiPagekit } from "react-icons/si";
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import React, { useState, useContext} from 'react';
 import { IoLogOutSharp } from "react-icons/io5";
+import { MyContext } from '../../../App';
 
 
 const Sidebar = () => {
 
     const [activeTab,setActiveTab] = useState(0);
     const [isToggleSubmenu,setIsToggleSubmenu] = useState(false);
+
+    const context = useContext(MyContext)
 
     const isOpenSubmenu=(index)=>{
         setActiveTab(index);

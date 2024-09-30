@@ -3,7 +3,7 @@
 *{margin: 0px; padding: 0px;}
 
 body{
-  font-family: "Open Sans", sans-serif !important; background: #ebe9eb;
+  font-family: "Open Sans", sans-serif !important; background: #ebe9eb; overflow-x: hidden; 
 }
 
 ::-webkit-scrollbar{width:5px !important; height: 5px !important;}
@@ -14,7 +14,8 @@ body{
 
 .btn-blue{background: #0858f7 !important; font-size: 14px !important; font-weight: 600; color: #fff !important; text-transform: capitalize !important; border-radius: 5px !important ;}
 
-header{width: 100%; height: 70px; background: #fff; position: fixed; top: 0px; left: 0px; z-index: 1000;}
+header{width: 100%; height: 70px; background: rgba(255,255,255,0.9); position: fixed; top: 0px; left: 0px; z-index: 1000;
+  -webkit-backdrop-filter: blur(5px);}
 header .row{margin: 0px !important;}
 header .logo{text-decoration: none;}
 header .logo img{width: 95px;}
@@ -62,9 +63,14 @@ border: 1px solid #0858f7; padding: 2px; border-radius: 100%;}
 .dropdown-list .scroll{max-height: 280px; overflow-y: scroll; overflow-x: hidden;}
 
 .main .sidebarWrapper{
-  width: 20%; flex: 0 0 20%; transition: all 0.3s ease-in-out;
+  width: 20%; flex: 0 0 20%; transition: all 0.3s ;
 }
-.main .sidebarWrapper .sidebar{width: 20%; height: 100vh; max-height: calc(100% - 70px); position: fixed; top: 70px; left: 0px; background: #fff; overflow-y: scroll;overflow-x: hidden;padding-bottom: 40px;}
+.main .sidebarWrapper.toggle {width: 0%;flex: 0 0 0%;}
+
+.main .sidebarWrapper .sidebar{width: 20%; height: 100vh; max-height: calc(100% - 70px); position: fixed; top: 70px;
+   left: 0px; background: #fff; overflow-y: scroll;overflow-x: hidden;padding-bottom: 40px; transition: all 0.3s;}
+.main .sidebarWrapper.toggle .sidebar{left: -100%;}
+
 .main .sidebarWrapper .sidebar::-webkit-scrollbar{width: 3px !important;}
 .main .sidebarWrapper .sidebar::-webkit-scrollbar-thumb{background: transparent !important;}
 .main .sidebarWrapper:hover .sidebar::-webkit-scrollbar{background: #767778 !important;}
@@ -123,7 +129,8 @@ border-radius: 100%; position: absolute; top: -20px; right: -20px; opacity: 0.5;
 .logoutWrapper .logoutBox button{font-size: 14px !important; font-weight: 600 !important;}
 .logoutWrapper .logoutBox button svg{margin-right: 5px; font-size: 18px !important;}
 
-.main .content{width: 80%; flex:0 0 80%;}
+.main .content{width: 80%; flex:0 0 80%; transition: all 0.3s;}
+.main .content.toggle {width: 100%; flex: 0 0 100%;}
 
 .right-content{padding: 90px 30px;}
 
@@ -140,7 +147,7 @@ border-radius: 100%; position: absolute; top: -20px; right: -20px; opacity: 0.5;
 .dashboardBoxWrapper .dashboardBox .icon svg{font-size: 40px; opacity: 0.3; color: #fff;}
 .dashboardBoxWrapper .dashboardBox .toggleIcon{font-size: 18px; color: rgba(0,0,0,0.5);cursor: pointer;min-width: 40px !important;
   width: 40px !important; height: 40px !important; border-radius: 50% !important;}
-.dashboardBoxWrapper .dashboardBox .chart{opacity: 0.1; 
+.dashboardBoxWrapper .dashboardBox .chart{opacity: 0.1 ; 
   position: absolute;bottom: 20px; left: 20px;}
 .dashboardBoxWrapper .dashboardBox .chart svg{font-size: 110px;color: #000;}
 .dashboardBoxWrapper .dashboardBox .bottomEle{position: relative; top: 15px;}
@@ -161,6 +168,8 @@ border-radius: 100%; position: absolute; top: -20px; right: -20px; opacity: 0.5;
 
 .cardFilters .colSize h4{font-size: 14px; font-weight: 800; text-transform: capitalize; color: #403e57;}
 
+h1,h2,h3,h4,h5,h6,p{color: #403e57;}
+.table-responsive::-webkit-scrollbar-thumb{background: #ccc !important;}
 .table .thead-dark th{background: #1866ee !important;color: #fff !important; border-color: rgba(255,255,255,1) !important;
   font-size: 13px !important;}
 .table tbody td{font-size: 13px !important; color: #403e57; font-weight: 500; }
@@ -172,4 +181,24 @@ border-radius: 100%; position: absolute; top: -20px; right: -20px; opacity: 0.5;
 .table tbody .actions button.error {background: rgba(241, 17, 51, 0.1) !important;}
 
 table.v-align td{vertical-align: middle !important;}
+
+table td .imgWrapper{width: 20%; flex: 0 0 20%;}
+table td .info {width: 65%;flex: 0 0 65%;}
+
+table td .info h6{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;font-size: 14px;
+  font-weight: 600; margin-bottom: 0px; }
+table td .info p{font-size: 13px; line-height: 18px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+  color: #5e5d72; margin-bottom: 0px ;}
+
+.table td .old, .table td .new{display: block; width: 100%;}
+table.v-align td .productBox{width: 300px;}
+
+.tableFooter{padding-bottom: 20px;}
+.tableFooter .pagination{margin-left: auto;}
+.tableFooter p{font-size: 14px; font-weight: 500;margin-bottom: 0px;}
+
+.css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{background-color: #0858f7 !important;}
+
+
+
 

@@ -159,5 +159,17 @@ border-radius: 100%; position: absolute; top: -20px; right: -20px; opacity: 0.5;
 .card{margin: 20px 0px; border-radius: 10px;}
 .card .hd{font-size: 18px; font-weight: bold; color: #403e57;}
 
-.cardFilters .col h4{font-size: 14px; font-weight: 800; text-transform: capitalize; color: #403e57;}
+.cardFilters .colSize h4{font-size: 14px; font-weight: 800; text-transform: capitalize; color: #403e57;}
+
+.table .thead-dark th{background: #1866ee !important;color: #fff !important; border-color: rgba(255,255,255,1) !important;
+  font-size: 13px !important;}
+.table tbody td{font-size: 13px !important; color: #403e57; font-weight: 500; }
+.table tbody .actions button{min-width:33px !important; width: 31px !important; height: 31px !important; margin: 0px 3px;}
+.table tbody .actions button svg{font-size: 31px !important;}
+
+.table tbody .actions button.secondary{background: rgba(203,60,231,0.1) !important;}
+.table tbody .actions button.success {background: rgba(26, 159, 83, 0.1) !important;}
+.table tbody .actions button.error {background: rgba(241, 17, 51, 0.1) !important;}
+
+table.v-align td{vertical-align: middle !important;}
 

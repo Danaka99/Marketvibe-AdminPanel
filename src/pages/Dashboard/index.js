@@ -7,11 +7,13 @@ import { IoIosTimer } from "react-icons/io";
 import Button from "@mui/material/Button";
 import { HiDotsHorizontal } from "react-icons/hi";
 import {Chart} from "react-google-charts";
+import { FaEye } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
-import InputLabel from '@mui/material/InputLabel';
-import FormHelperText from '@mui/material/FormHelperText';
+
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
 export const data = [
   ["Year", "Total Sells"],
@@ -29,13 +31,14 @@ export const options = {
 };
 
 const Dashboard = () => {
-  const ITEM_HEIGHT = 48;
+  const ITEM_HEIGHT = 40;
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
     const [showBy, setShowBy] = useState('');
     const [CategoryBy, setCategoryBy] = useState('');
+     const [brandBy, setBrandBy] = useState('');
 
 
     const handleClick = (event) => {
@@ -117,12 +120,14 @@ const Dashboard = () => {
             <h3 className="hd">Best Selling Products</h3>
 
             <div className="row cardFilters mt-3">
-              <div className="col-md-3">
+              <div className="col-md-3 colSize">
                 <h4>Show By</h4>
+                <FormControl size="small" className="w-100" >
                 <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     className="w-100"
+                    displayEmpty
                     value={showBy}
                     onChange={(e)=>setShowBy(e.target.value)}
                     label="Age"
@@ -134,13 +139,16 @@ const Dashboard = () => {
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
+                </FormControl>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 colSize">
                 <h4>Category By</h4>
+                 <FormControl size="small" className="w-100">
                 <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     className="w-100"
+                    displayEmpty
                     value={CategoryBy}
                     onChange={(e)=>setCategoryBy(e.target.value)}
                     label="Age"
@@ -152,13 +160,37 @@ const Dashboard = () => {
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
+                </FormControl>
               </div>
-              <div className="col-md-3">
-                <h4>Show By</h4>
+              <div className="col-md-3 colSize">
+                <h4>Brand By</h4>
+                <FormControl size="small" className="w-100">
                 <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     className="w-100"
+                    displayEmpty
+                    value={brandBy}
+                    onChange={(e)=>setBrandBy(e.target.value)}
+                    label="Age"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+                </FormControl>
+              </div>
+              <div className="col-md-3 colSize">
+                <h4>Show By</h4>
+                <FormControl size="small" className="w-100">
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    className="w-100"
+                    displayEmpty
                     value={showBy}
                     onChange={(e)=>setShowBy(e.target.value)}
                     label="Age"
@@ -170,28 +202,56 @@ const Dashboard = () => {
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
-              </div>
-              <div className="col-md-3">
-                <h4>Show By</h4>
-                <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    className="w-100"
-                    value={showBy}
-                    onChange={(e)=>setShowBy(e.target.value)}
-                    label="Age"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
+                </FormControl>
               </div>
             </div>
+            
+            <div className="table-responsive mt-3">
+            <table className="table table-bordered v-align">
+              <thead className="thead-dark">
+                  <tr>
+                    <th>U_ID</th>
+                    <th>PRODUCT</th>
+                    <th>CATEGORY</th>
+                    <th>BRAND</th>
+                    <th>PRICE</th>
+                    <th>STOCK</th>
+                    <th>RATING</th>
+                    <th>ORDER</th>
+                    <th>SALES</th>
+                    <th>ACTIONS</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>#1</td>
+                    <td>Tops and skirts set for Female</td>
+                    <td>women</td>
+                    <td>richman</td>
+                    <td>
+                      <span className="old">$21.00</span>
+                      <span className="new">$</span>
+                    </td>
+                    <td>30</td>
+                    <td>4.9(16)</td>
+                    <td>380</td>
+                    <td>38k</td>
+                    <td>
+                      <div className="actions d-flex align-items-center">
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Button className="success" color="success"><FaPencilAlt/></Button>
+                        <Button className="error" color="error"><MdDelete/></Button>
+                      </div>
+                    </td>
+
+                  </tr>
+              </tbody>
+            </table>
+          </div>
 
           </div>
+
+          
           
       </div>
 

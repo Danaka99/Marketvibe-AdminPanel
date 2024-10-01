@@ -40,7 +40,9 @@ const Dashboard = () => {
 
     useEffect(()=>{
       context.setIsHideSidebarAndHeader(false);
-    },[]);
+
+      window.scrollTo(0,0);
+    });
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);

@@ -26,6 +26,7 @@ const Signup = () => {
 
     useEffect(()=>{
         context.setIsHideSidebarAndHeader(true);
+        window.scrollTo(0,0);
     });
 
     const focusInput=(index)=>{
@@ -39,7 +40,7 @@ const Signup = () => {
         <div className='row'>
 
             <div className='col-md-8 d-flex align-items-center flex-column part1 justify-content-center'>
-                <h1>MARKET-V <span className='intro-marketvibe'>ECOMMERCE DASHBOARD</span> & ADMIN PANEL</h1>
+                <h1>MARKET-V <span className='text-sky'>ECOMMERCE DASHBOARD</span> & ADMIN PANEL</h1>
                 <p>Market Vibe is a dynamic e-commerce platform where buyers and sellers connect to trade a wide range of products, from electronics to fashion. Whether you're looking for great deals or showcasing unique items, Market Vibe provides a seamless, user-friendly experience for all your shopping and selling needs.</p>
                 <div className='w-100 mt-4'>
                     <Link to={'/'}><Button className='btn-log btn-lg btn-big'><IoHome/>&nbsp;Go To Home</Button></Link>
@@ -63,12 +64,12 @@ const Signup = () => {
                     <div className= {`form-group mb-3 position-relative ${inputIndex===0 && 'focus'}`}>
                         <span className='icon'><FaUserCheck/></span>
                         <input type='text' className='form-control' placeholder='&nbsp;enter your name'
-                        onFocus={()=>focusInput(0)} onBlur={()=>setInputIndex(null)} />
+                        onFocus={()=>focusInput(0)} onBlur={()=>setInputIndex(null)} autoFocus />
                     </div>
                     <div className= {`form-group mb-3 position-relative ${inputIndex===1 && 'focus'}`}>
                         <span className='icon'><IoMdMail/></span>
                         <input type='text' className='form-control' placeholder='&nbsp;enter your email'
-                        onFocus={()=>focusInput(1)} onBlur={()=>setInputIndex(null)} />
+                        onFocus={()=>focusInput(1)} onBlur={()=>setInputIndex(null)}/>
                     </div>
                     <div className= {`form-group mb-3 position-relative ${inputIndex===2 && 'focus'}`}>
                         <span className='icon'><RiLockPasswordFill/></span>

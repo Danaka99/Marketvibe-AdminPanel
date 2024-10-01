@@ -79,7 +79,7 @@ const Header = () => {
               <Button className="rounded-circle mr-3">
                 <TbWorld />
               </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button className="rounded-circle mr-3">
+              <Button className="rounded-circle mr-3" onClick={()=>context.setThemeMode(!context.themeMode)}>
                 <MdLightMode />
               </Button>&nbsp;&nbsp;&nbsp;&nbsp;
               <Button className="rounded-circle mr-3">

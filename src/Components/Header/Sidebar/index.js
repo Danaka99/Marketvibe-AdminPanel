@@ -32,21 +32,21 @@ const Sidebar = () => {
       <ul>
         <li>
             <Link to="/">
-            <Button className={`w-100 ${activeTab===0 ? 'active' :''}`} onClick={()=>isOpenSubmenu(0)}>
+            <Button className={`w-100 mb-1 ${activeTab===0 ? 'active' :''}`} onClick={()=>isOpenSubmenu(0)}>
                 <span className='icon'><MdDashboard/></span>
                 Dashboard
             </Button>
             </Link>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===1 ? 'active' :''}`} onClick={()=>isOpenSubmenu(1)}>
+            <Button className={`w-100 mb-1 ${activeTab===1 ? 'active' :''}`} onClick={()=>isOpenSubmenu(1)}>
                 <span className='icon'><FaUserCircle/></span>
                 User
                 <span className='arrow'><FaAngleRight/></span>
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===2 && isToggleSubmenu===true ? 'active' :''}`} onClick={()=>isOpenSubmenu(2)}>
+            <Button className={`w-100 mb-1 ${activeTab===2 && isToggleSubmenu===true ? 'active' :''}`} onClick={()=>isOpenSubmenu(2)}>
                 <span className='icon'><AiFillProduct/></span>
                 Product
                 <span className='arrow'><FaAngleRight/></span>
@@ -60,38 +60,38 @@ const Sidebar = () => {
             </div>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===3 ? 'active' :''}`} onClick={()=>isOpenSubmenu(3)}>
+            <Button className={`w-100 mb-1 ${activeTab===3 ? 'active' :''}`} onClick={()=>isOpenSubmenu(3)}>
                 <span className='icon'><FaFileInvoice/></span>
                 Invoices
                 <span className='arrow'><FaAngleRight/></span>
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===4 ? 'active' :''}`} onClick={()=>isOpenSubmenu(4)}>
+            <Button className={`w-100 mb-1 ${activeTab===4 ? 'active' :''}`} onClick={()=>isOpenSubmenu(4)}>
                 <span className='icon'><FaShoppingCart/></span>
                 Orders
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===5 ? 'active' :''}`} onClick={()=>isOpenSubmenu(5)}>
+            <Button className={`w-100 mb-1 ${activeTab===5 ? 'active' :''}`} onClick={()=>isOpenSubmenu(5)}>
                 <span className='icon'><IoMdMail/></span>
                 Messages
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===6 ? 'active' :''}`} onClick={()=>isOpenSubmenu(6)}>
+            <Button className={`w-100  mb-1 ${activeTab===6 ? 'active' :''}`} onClick={()=>isOpenSubmenu(6)}>
                 <span className='icon'><FaBell/></span>
                 Notification
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===7 ? 'active' :''}`} onClick={()=>isOpenSubmenu(7)}>
+            <Button className={`w-100 mb-1 ${activeTab===7 ? 'active' :''}`} onClick={()=>isOpenSubmenu(7)}>
                 <span className='icon'><IoIosSettings/></span>
                 Setting
             </Button>
         </li>
         <li>
-            <Button className={`w-100 ${activeTab===8 ? 'active' :''}`} onClick={()=>isOpenSubmenu(8)}>
+            <Button className={`w-100 mb-1 ${activeTab===8 ? 'active' :''}`} onClick={()=>isOpenSubmenu(8)}>
                 <span className='icon'><SiPagekit/></span>
                 Blank Page
             </Button>

@@ -8,7 +8,6 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import google from '../../assests/google.jpg';
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
@@ -46,7 +45,7 @@ const Login = () => {
                         <input type='text' className='form-control' placeholder='&nbsp;enter your email'
                         onFocus={()=>focusInput(0)} onBlur={()=>setInputIndex(null)} />
                     </div>
-                    <div className= {`form-group mb-3 position-relative ${inputIndex===1 && 'focus'}`}>
+                    <div className= {`form-group mb-4 position-relative ${inputIndex===1 && 'focus'}`}>
                         <span className='icon'><RiLockPasswordFill/></span>
                         <input type={`${isShowPassword===true ? 'text' : 'password'}`} className='form-control' placeholder='&nbsp;enter your password'
                         onFocus={()=>focusInput(1)} onBlur={()=>setInputIndex(null)} />

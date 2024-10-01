@@ -6,7 +6,7 @@ import { MdOutlineMenuOpen } from "react-icons/md";
 import Searchbox from "./Searchbox";
 import { MdOutlineMenu } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
-import { MdDarkMode } from "react-icons/md";
+// import { MdDarkMode } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaBell } from "react-icons/fa";

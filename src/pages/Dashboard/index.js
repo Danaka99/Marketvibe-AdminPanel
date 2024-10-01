@@ -2,7 +2,7 @@ import DashboardBox from "../../pages/Dashboard/components/dashboardBox";
 import { FaUserCircle } from "react-icons/fa";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoIosTimer } from "react-icons/io";
 import Button from "@mui/material/Button";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -15,6 +15,7 @@ import Pagination from '@mui/material/Pagination';
 
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { MyContext } from "../../App";
 
 
 export const data = [
@@ -34,6 +35,12 @@ export const options = {
 
 const Dashboard = () => {
   const ITEM_HEIGHT = 40;
+
+    const context= useContext(MyContext);
+
+    useEffect(()=>{
+      context.setIsHideSidebarAndHeader(false);
+    },[]);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);

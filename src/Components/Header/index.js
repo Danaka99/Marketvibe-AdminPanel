@@ -1,6 +1,6 @@
 import React, { useState, useContext} from 'react';
 import { Link } from "react-router-dom";
-import logo from "../../assests/logo.jpg";
+import logo from "../../assests/MarketV-white.png";
 import Button from '@mui/material/Button';
 import { MdOutlineMenuOpen } from "react-icons/md";
 import Searchbox from "./Searchbox";

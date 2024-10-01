@@ -9,6 +9,7 @@ import { IoEyeOff } from "react-icons/io5";
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import google from '../../assests/google.jpg';
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
 
@@ -38,7 +39,7 @@ const Login = () => {
                 <form>
                     <div className='logo text-center mb-3'>
                         <img src={marketvibe} alt='' width="100px" className='mb-2'/>
-                        <h5 className='font-weight-bold'>Login to MarketV</h5>
+                        <h5 className='font-weight-bold'>Login to <b>Market-V</b></h5>
                     </div>
                     <div className= {`form-group mb-4 position-relative ${inputIndex===0 && 'focus'}`}>
                         <span className='icon'><IoMdMail/></span>
@@ -70,7 +71,7 @@ const Login = () => {
                             <span className='line'></span>
                         </div>
                         <Button variant='outlined'  className='w-100 btn-lg btn-big loginWithGoogle'>
-                            <img src={google} width="25px" alt=''/>&nbsp; Sign In with Google
+                            <FcGoogle className='googleBtn' alt=''/>&nbsp; Sign In with Google
                         </Button>
                     </div>
                     

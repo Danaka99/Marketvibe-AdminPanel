@@ -33,7 +33,7 @@ header{width: 100%; height: 70px; background: rgba(255,255,255,0.9); position: f
   -webkit-backdrop-filter: blur(5px);}
 header .row{margin: 0px !important;}
 header .logo{text-decoration: none;}
-header .logo img{width: 95px;}
+header .logo img{width: 70px;}
 header .logo span{color:#292929; font-weight: 800; font-size: 24px;}
 
 header button.rounded-circle{
@@ -245,7 +245,7 @@ table.v-align td .productBox{width: 300px;}
    font-size: 16px; font-weight: 600; width: 40px; height: 40px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 50%;}
 
 .loginWithGoogle{text-transform: capitalize !important; font-weight: bold !important;}
-
+.googleBtn{width: 30px; height: 30px;}
 
 
 

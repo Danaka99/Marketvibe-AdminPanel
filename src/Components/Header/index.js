@@ -10,8 +10,8 @@ import { MdLightMode } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
-import chandi from "../../assests/chandi.jpg"
-import rash from "../../assests/IMG_9849.jpg"
+import chandi from "../../assests/chandi.jpg";
+import rash from "../../assests/IMG_9849.jpg";
 import { TbWorld } from "react-icons/tb";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -250,6 +250,9 @@ const Header = () => {
                         <span className='rounded-circle'>
                             <img src={chandi} alt="chandi"/>
                         </span>
+                        {/* <div>
+                          <userAvatarImg img={''}/>
+                        </div> */}
                   </div>
                     </div>
                   <div className='dropdownInfo'>

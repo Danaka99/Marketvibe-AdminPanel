@@ -499,3 +499,19 @@ body.light .reviewForm textarea::--webkit-input-placeholder{color: rgba(0,0,0,0.
 
 
 
+
+
+
+
+
+.form .form-group{margin-bottom: 25px;}
+.form .form-group h6{margin-bottom: 10px; font-size: 15px;}
+.form .form-group input,.form .form-group textarea{background: #fafafa; width: 100%; outline: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important; height: 40px; padding-left: 15px; border-radius: 5px;
+  font-size: 14 px;}
+.form .form-group textarea{height: 120px; padding-top: 15px;}
+
+body.dark .form .form-group input, body.dark .form .form-group textarea{background: #292929 !important; border: 1px solid #c2b9b9 !important;
+  color: #fff !important;}
+
+

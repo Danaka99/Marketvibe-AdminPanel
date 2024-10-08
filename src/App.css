@@ -252,6 +252,8 @@ body.dark .logoutWrapper .logoutBox button{background-color: #292929 !important;
 .dashboardBoxWrapper .dashboardBox .chart svg{font-size: 110px;color: #000;}
 .dashboardBoxWrapper .dashboardBox .bottomEle{position: relative; top: 15px;}
 
+body.light .btn-Dash-Title{color: #fff !important;}
+
 .dashboardBoxWrapperRow .box{width: 100%; height: 100%;}
 
 .dashboardBoxWrapper .dashboardBox .MuiList-root svg{color: #000 !important; font-size: 17px !important; margin-right: 10px !important;}
@@ -344,12 +346,15 @@ table.v-align td .productBox{width: 300px;}
 .tableFooter p{font-size: 14px; font-weight: 500;margin-bottom: 0px;}
 
 body.dark table td{color: rgba(255, 255, 255, 0.8) !important;}
-.css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{background-color: #292929 !important;}
+.css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{background-color: #0858f7 !important; color: #fff !important;}
 body.dark .table-bordered td{border: 1px solid rgba(255, 255, 255, 0.1) !important;}
 body.dark .table-bordered .thead-dark th{border: 1px solid rgba(255, 255, 255, 0.1) !important;}
 body.dark .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root{color: rgba(255, 255, 255, 0.8) !important;}
-body.dark .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root:hover{ background:#292929 !important; color:  #fff !important;}
-
+body.dark .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root:hover{ background:#fff !important; color:  #111 !important;}
+.css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root{color: #000 !important;}
+.css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root:hover{background: #0858f7 !important; color: #fff !important;}
+body.dark .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{background-color: #292929 !important ;
+color: #fff !important;}
 
 
 .loginSection{width: 100%; height: 100vh; padding: 35px 25px; background: #fff;position: relative;}

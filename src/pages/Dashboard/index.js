@@ -75,7 +75,7 @@ const Dashboard = () => {
             <div className="col-md-4 pl-0">
               <div className="box graphBox">
                 <div className="d-flex w-100 align-items-center justify-content-between bottomEle ">
-            <h6 className="text-white mb-0 mt-0">Total Sales</h6>
+            <h6 className="text-white mb-0 mt-0 btn-Dash-Title">Total Sales</h6>
                 <Button className="ml-auto toggleIcon" onClick={handleClick}>
                     <HiDotsHorizontal />
                 </Button>

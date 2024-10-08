@@ -8,7 +8,6 @@ import { FaEye } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Pagination from '@mui/material/Pagination';
-import { Link } from 'react-router-dom';
 
 //breadcrumb code
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
@@ -55,7 +54,10 @@ const Products = () => {
 
             </Breadcrumbs>
         </div>
-        <div className="table-responsive mt-3">
+        <div className="card shadow border-0 p-3 mt-4">
+            <h3 className="hd">Best Selling Products</h3>
+
+            <div className="table-responsive mt-3">
             <table className="table table-bordered v-align">
               <thead className="thead-dark">
                   <tr>
@@ -101,11 +103,7 @@ const Products = () => {
                     <td>38k</td>
                     <td>
                       <div className="actions d-flex align-items-center">
-                        <Link to="/product/details">
-                         <Button className="secondary" color="secondary">
-                            <FaEye/>
-                         </Button>
-                        </Link>
+                        <Button className="secondary" color="secondary"><FaEye/></Button>
                         <Button className="success" color="success"><FaPencilAlt/></Button>
                         <Button className="error" color="error"><MdDelete/></Button>
                       </div>
@@ -371,6 +369,8 @@ const Products = () => {
               <Pagination count={100} color="primary" className="pagination"
               showFirstButton showLastButton/>
              </div>
+          </div>
+
           </div>
       </div>
     </>

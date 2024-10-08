@@ -40,8 +40,8 @@ const Signup = () => {
         <div className='row'>
 
             <div className='col-md-8 d-flex align-items-center flex-column part1 justify-content-center'>
-                <h1>MARKET-V <span className='text-sky'>ECOMMERCE DASHBOARD</span> & ADMIN PANEL</h1>
-                <p>Market Vibe is a dynamic e-commerce platform where buyers and sellers connect to trade a wide range of products, from electronics to fashion. Whether you're looking for great deals or showcasing unique items, Market Vibe provides a seamless, user-friendly experience for all your shopping and selling needs.</p>
+                <h1 className='Black-heading'>MARKET-V <span className='text-sky'>ECOMMERCE DASHBOARD</span> & ADMIN PANEL</h1>
+                <p className='Black-P'>Market Vibe is a dynamic e-commerce platform where buyers and sellers connect to trade a wide range of products, from electronics to fashion. Whether you're looking for great deals or showcasing unique items, Market Vibe provides a seamless, user-friendly experience for all your shopping and selling needs.</p>
                 <div className='w-100 mt-4'>
                     <Link to={'/'}><Button className='btn-log btn-lg btn-big'><IoHome/>&nbsp;Go To Home</Button></Link>
                 </div>
@@ -109,14 +109,14 @@ const Signup = () => {
                             <span className='txt'>or</span>
                             <span className='line'></span>
                         </div>
-                        <Button variant='outlined'  className='w-100 btn-lg btn-big loginWithGoogle'>
-                            <FcGoogle className='googleBtn' alt=''/>&nbsp; Sign In with Google
+                        <Button variant='outlined'  className='w-100 btn-lg btn-big loginWithGoogle SignUpGoogle'>
+                            <FcGoogle className='googleBtn' alt=''/>&nbsp; <span className='SignUpInfo'>Sign In with Google</span>
                         </Button>
                     </div>
                     <div className='form-group text-center mb-0 mt-3'>
                      
-                        <Button variant='outlined'  className='w-100 btn-lg btn-big loginWithGoogle'>
-                            <SiFacebook className='FbBtn' alt=''/>&nbsp; Sign In with Facebook
+                        <Button variant='outlined'  className='w-100 btn-lg btn-big loginWithGoogle SignUpGoogle'>
+                            <SiFacebook className='FbBtn' alt=''/>&nbsp;<span className='SignUpInfo'> Sign In with Facebook</span>
                         </Button>
                     </div>
                       {/* <div className='form-group text-center mb-0 mt-3'>
@@ -127,9 +127,9 @@ const Signup = () => {
                     </div> */}
                     
                 </form>
-                <span className='text-center mt-3 d-block'>
+                <span className='text-center mt-3 d-block Footer-text'>
                     Already have an account?
-                    <Link to={'/login'} className='link color ml-2'>&nbsp; Sign In</Link>
+                    <Link to={'/login'} className='link color ml-2 Footer-Btn-2'>&nbsp; Sign In</Link>
                 </span>
             </div>
         </div>

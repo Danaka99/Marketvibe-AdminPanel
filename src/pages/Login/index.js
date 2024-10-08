@@ -38,12 +38,12 @@ const Login = () => {
                 <form>
                     <div className='logo text-center mb-3'>
                         <img src={marketvibe} alt='' width="100px" className='mb-2'/>
-                        <h5 className='font-weight-bold'>Login to <b>Market-V</b></h5>
+                        <h5 className='font-weight-bold Welcome-font'>Login to <b>Market-V</b></h5>
                     </div>
                     <div className= {`form-group mb-4 position-relative ${inputIndex===0 && 'focus'}`}>
                         <span className='icon'><IoMdMail/></span>
                         <input type='text' className='form-control' placeholder='&nbsp;enter your email'
-                        onFocus={()=>focusInput(0)} onBlur={()=>setInputIndex(null)} autoFocus />
+                        onFocus={()=>focusInput(0)} onBlur={()=>setInputIndex(null)}/>
                     </div>
                     <div className= {`form-group mb-4 position-relative ${inputIndex===1 && 'focus'}`}>
                         <span className='icon'><RiLockPasswordFill/></span>
@@ -80,7 +80,7 @@ const Login = () => {
             <div className='wrapper mt-4 card border footer p-3'>
                 <span className='text-center'>
                     Don't have an account?
-                    <Link to={'/signUp'} className='link color ml-2'>&nbsp; Register</Link>
+                    <Link to={'/signUp'} className='link color ml-2 Footer-Link'>&nbsp; Register</Link>
                 </span>
             </div>
 

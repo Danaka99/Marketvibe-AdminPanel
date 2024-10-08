@@ -114,7 +114,7 @@ const Dashboard = () => {
       </Menu>
                 </div>
 
-                <h3 className="text-white font-weight-bold">$3,787,681.00</h3>
+                <h3 className="text-white font-weight-bold"><span className="DashBoardheading">$3,787,681.00</span></h3>
                 <p>$3,789,90 in last month</p>
 
                 <Chart

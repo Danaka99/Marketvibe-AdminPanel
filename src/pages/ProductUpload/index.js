@@ -8,7 +8,12 @@ import { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { Button } from '@mui/material';
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { IoCloseSharp } from 'react-icons/io5'; 
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import React, { useRef } from 'react';
+import { FaRegImages } from 'react-icons/fa';
 
 
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
@@ -36,12 +41,21 @@ const StyledBreadcrumb = styled(Chip)(({theme})=>{
 
 const ProductUpload = () => {
 
+    const fileInputRef = useRef(null);
+
+ 
+    const handleClick = () => {
+    fileInputRef.current.click();
+    };
+
     const [categoryVal, setcategoryVal] = useState('');
     const [ratingValue, setRatingValue] = useState(1); 
 
     const handleChangeCategory = (event) => {
         setcategoryVal(event.target.value);
     };
+
+    
 
   return (
     <>
@@ -77,7 +91,7 @@ const ProductUpload = () => {
                         <h5 className='mb-4'>Basic Information</h5>
                         <div className='form-group'>
                             <h6>Title</h6>
-                            <input type='text'/>  
+                            <input type='text' name='name'/>  
                         </div>
                         <div className='form-group'>
                             <h6>Description</h6>
@@ -186,12 +200,45 @@ const ProductUpload = () => {
                             <textarea rows={10} cols={20}/>  
                         </div>
                     </div>
+                    <div className='card p-4 mt-0'>
+                            <div className='imagesUploadSec'>
+                                <h5 class="mb-4">Media and Published</h5><br/>
+
+                                <div className='imgUploadBox d-flex align-items-center'>
+                                    <div className='uploadBox'>
+                                    <span className='remove'>
+                                            <IoCloseSharp/>
+                                    </span>
+                                        <div className='box'>
+                                            <LazyLoadImage
+                                            alt={"image"}
+                                            effect="blur"
+                                            className="w-100"
+                                            src={`https://mironcoder-hotash.netlify.app/images/product/single/01.webp`}/>
+                                        </div>
+                                    </div>
+                                    <div className='uploadBox'>
+                                    <div className='info w-100' onClick={handleClick}>
+                                    <input
+                                        type='file'
+                                        hidden
+                                        multiple
+                                        name="images"
+                                        ref={fileInputRef}
+                                        />
+                                        <FaRegImages className='IconUpload align-items-center justify-content-center w-100' />
+                                        <h5 className='ImgUpload'>Image Upload</h5>
+                        </div>
+                    </div>
                 </div>
-
                 <br/>
-
-                <Button className='btn-blue btn-lg btn-big '><FaCloudUploadAlt/>&nbsp;&nbsp;PUBLISH AND VIEW</Button>
-
+                
+                <Button type='submit' className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
+                PUBLISH AND VIEW</Button>
+                
+                      </div>
+                    </div>
+                </div>
             </div>
         </form>
       </div>

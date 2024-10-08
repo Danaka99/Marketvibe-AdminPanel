@@ -70,8 +70,10 @@ header button.rounded-circle{
 header button.rounded-circle svg{color: #292929; font-size: 18px !important;}
 header button.rounded-circle:hover svg{color: #0858f7 !important; transition: all 0 2s ease-in-out;}
 
+body.dark header button.rounded-circle{color: #292929 !important;}
 body.dark header button.rounded-circle{background: #4c5432 !important;}
 body.dark header button.rounded-circle svg{color: #fff !important;}
+body.dark header button.rounded-circle:hover svg{color: #292929 !important; transition: all 0 2s ease-in-out;}
 
 header .part2{padding-left: 50px;}
 
@@ -85,18 +87,12 @@ body.dark .searchBox input, body.dark  .searchBox input::-webkit-input-placehold
 .searchBox svg{font-size: 18px; color:#292929 ;}
 
 .myAcc{text-align: left !important; color: #0858f7 !important; text-transform: capitalize !important;}
+body.dark .myAcc{color: rgba(255, 255, 255, 1) !important;}
+
 .userImg{display: flex;align-items: center;justify-content: center;overflow: hidden;width: 40px;height: 40px;
 border: 1px solid #0858f7; padding: 2px; border-radius: 100%;}
-body.dark .userImg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #fff;
-  padding: 2px;
-  border-radius: 100%;
+body.dark .userImg {display: flex;align-items: center;justify-content: center;overflow: hidden;width: 40px;height: 40px;
+  border: 1px solid #fff;padding: 2px;border-radius: 100%;
 }
 .userImg .rounded-circle{
   display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100%; height:100%;
@@ -105,7 +101,7 @@ body.dark .userImg {
 .userImg .rounded-circle img{object-fit: cover; width: 100%; height: 100%;}
 
 .myAcc .userInfo{padding-left: 10px;}
-.myAcc .userInfo h4{font-size: 16px;font-weight: 500; margin-bottom: 0px;}
+.myAcc .userInfo h4{font-size: 16px;line-height: 15px; font-weight: 500; margin-bottom: 0px;}
 .myAcc .userInfo p{margin-top: 0px; font-size: 12px; color: #000; opacity: 0.7;}
 
 body.dark .myAcc .userInfo *{color: rgba(255, 255, 255, 0.8) !important;}
@@ -115,7 +111,7 @@ body.dark .MuiPaper-elevation li *, body.dark .MuiPaper-elevation li{color: rgba
 #account-menu li{font-size: 15px !important; padding: 12px 15px !important; }
 #account-menu li svg{font-size: 20px !important;}
 
-#notification .MuiPaper-elevation{right: 240px !important; width: 300px !important;left: auto !important; top: 58px !important;}
+#notification .MuiPaper-elevation{right: 240px !important; width: 300px !important; left: auto !important; top: 58px !important;}
 
 .dropdown-list .head{padding: 10px 0px;}
 .dropdown-list .head h4{font-size: 17px; font-weight: 600;}
@@ -126,6 +122,7 @@ body.dark .dropdown-list li.MuiButtonBase-root{background-color: #2d3023 !import
 body.dark .dropdown-list li.MuiButtonBase-root:hover {
   background: rgba(255, 255, 255, 0.1)!important;
 }
+.css-9mgopn-MuiDivider-root{margin-bottom: 8px !important;}
 .dropdownInfo{padding-left: 15px;}
 .dropdownInfo h4{font-size: 13px;font-weight: 500; white-space: break-spaces; line-height: 20px;margin-top: 0px;}
 body.dark .dropdown-list .head h4{color: rgba(255, 255, 255, 0.8) !important;}
@@ -134,7 +131,10 @@ body.dark .dropdown-list .head h4{color: rgba(255, 255, 255, 0.8) !important;}
 .dropdownInfo p{font-size: 12px; font-weight: 500; margin-top: 0px;}
 
 .text-sky{color:#0858f7 !important}
-.dropdown-list .scroll{max-height: 280px; overflow-y: scroll; overflow-x: hidden;}
+.dropdown-list .scroll{max-height: 280px; overflow-y: auto; overflow-x: hidden;}
+body.dark .css-djz5el-MuiPaper-root-MuiPopover-paper-MuiMenu-paper::before{background:#3e422e !important;}
+
+
 
 
 
@@ -160,25 +160,20 @@ body.dark .main .sidebarWrapper .sidebar{background:#3e422e !important ;}
 body.dark .main .sidebarWrapper .sidebar ul li button{color: rgba(255, 255, 255, 0.8) !important;}
 
 .main .sidebarWrapper .sidebar ul li button .icon{display: flex;align-items: center; justify-content: center; width: 25px; height: 25px; margin-right: 10px;}
-.main .sidebarWrapper .sidebar ul li button .icon svg{color: #000; opacity: 0.8; font-size: 22px;}
+.main .sidebarWrapper .sidebar ul li button .icon svg{color: #5e5d72 !important; opacity: 1; font-size: 22px;}
 body.dark .main .sidebarWrapper .sidebar ul li button .icon svg{color: rgba(255, 255, 255, 0.8) !important;}
 
-.main .sidebarWrapper .sidebar ul li button .arrow{margin-left: auto;display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
-  transition: all 0.2s ease-in-out;
-}
+.main .sidebarWrapper .sidebar ul li button .arrow{margin-left: auto;display: flex;align-items: center;justify-content: center;
+  width: 25px;height: 25px;transition: all 0.2s ease-in-out;}
 
 
 .main .sidebarWrapper .sidebar ul li button:hover{background: #f1f1f1 !important;}
 body.dark .main .sidebarWrapper .sidebar ul li button:hover{background: rgba(255, 255, 255, 0.1)!important;}
 body.dark .main .sidebarWrapper .sidebar ul li button.active {background: rgba(255, 255, 255, 0.1) !important;}
-.main .sidebarWrapper .sidebar ul li button.active {
-  background: #f1f1f1 !important;
-}
+.main .sidebarWrapper .sidebar ul li button.active{background: #f1f1f1 !important;}
 .main .sidebarWrapper .sidebar ul li button.active .arrow{transform: rotate(90deg);}
+.main .sidebarWrapper .sidebar ul li button.active .icon svg{color:#0858f7 !important;}
+body.dark .main .sidebarWrapper .sidebar ul li button.active .icon svg{color: #fff !important;}
 
 .main .sidebarWrapper .sidebar ul .submenu {padding: 0px 45px; position: relative;transition: all 0.3s;}
 .main .sidebarWrapper .sidebar ul .submenu::before{content: ''; width: 1px; height: 95%;position: absolute; top: 0px; left: 25px; background: rgba(0,0,0,0.2);}
@@ -419,7 +414,7 @@ body.dark .css-1gaup4j-MuiButtonBase-root-MuiPaginationItem-root:hover{ backgrou
 
 
 body.dark .css-1wuw8dw-MuiBreadcrumbs-separator{color: #fff !important;}
-body.dark .sliderSml .slick-current .item{border: 4px solid #090606 !important;}
+body.dark .sliderSml .slick-current .item{border: 4px solid #292929 !important;}
 .sliderSml .slick-current .item{border: 2px solid #121111 !important;}
 .sliderSml .slick-slide{padding-right: 10px;}
 .sliderSml .slick-slide .item{border-radius: 7px !important; overflow: hidden;}
@@ -513,5 +508,60 @@ body.light .reviewForm textarea::--webkit-input-placeholder{color: rgba(0,0,0,0.
 
 body.dark .form .form-group input, body.dark .form .form-group textarea{background: #292929 !important; border: 1px solid #c2b9b9 !important;
   color: #fff !important;}
+
+.imgUploadBox {width: 100%; flex-wrap: nowrap; gap: 10px;}
+.imgUploadBox .uploadBox {align-items: center;background: #fafafa; border: 1px dashed #0000004d;border-radius: 10px;cursor: pointer;
+  display: flex;height: 150px !important;justify-content: center;padding: 0;position: relative;transition: all .3s;
+  width: 150px;}
+body.dark .imgUploadBox .uploadBox{border: 1px dashed #292929 !important;}
+
+
+.imgUploadBox .uploadBox .box{width: 100%; height: 150px !important;}
+.imgUploadBox .uploadBox .box .lazy-load-image-background{ padding: 2.5px; height: 100% !important;width: 100% !important;}
+
+.imgUploadBox .uploadBox .remove{align-items: center;background: #d32f2f;border-radius: 50%;cursor: pointer;display: flex;
+  height: 20px;justify-content: center;position: absolute;right: -7px;top: -7px; width: 20px;z-index: 100;}
+.imgUploadBox .uploadBox .remove svg{font-size: 18px; color: #fff;}
+
+.imgUploadBox .uploadBox .MuiBox-root{position: absolute;}
+.imgUploadBox .uploadBox:hover{background: #f1f1f1;}
+body.dark .imgUploadBox .uploadBox:hover {background: #dbd9d9;}
+
+.imgUploadBox .UploadBox img{height: 100%; object-fit: cover;}
+.imgUploadBox .UploadBox input{height: 100%;opacity: 0;position: absolute;width: 100%;}
+
+.imgUploadBox .UploadBox .info {display: flex;align-items: center;justify-content: center;flex-direction: column;pointer-events: none;}
+.IconUpload  {font-size: 50px !important;opacity: 0.2;overflow: hidden;}
+.ImgUpload {font-size: 15px !important;opacity: 0.5;overflow: hidden;text-align: center;color: #403e57 !important;}
+body.dark .ImgUpload {color: #403e57 !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

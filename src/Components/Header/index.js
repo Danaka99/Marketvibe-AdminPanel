@@ -106,8 +106,8 @@ const Header = () => {
                             paper: {
                             elevation: 0,
                             sx: {
-                                maxHeight: 400, // Set the max height to allow scrolling
-                                overflowY: 'auto', // Enable vertical scrolling
+                                maxHeight: 405, // Set the max height to allow scrolling
+                                overflowY: 'hidden', // Enable vertical scrolling
                                 filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                 mt: 1.5,
                                 '& .MuiAvatar-root': {

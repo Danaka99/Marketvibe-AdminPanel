@@ -12,8 +12,8 @@ import { SiPagekit } from "react-icons/si";
 import { Link } from "react-router-dom";
 import React, { useState} from 'react';
 import { IoLogOutSharp } from "react-icons/io5";
-
-
+import { FaBusinessTime } from "react-icons/fa6";
+import { MdHelp } from "react-icons/md";
 
 const Sidebar = () => {
 
@@ -39,11 +39,21 @@ const Sidebar = () => {
             </Link>
         </li>
         <li>
-            <Button className={`w-100 mb-1 ${activeTab===1 ? 'active' :''}`} onClick={()=>isOpenSubmenu(1)}>
+            <Button className={`w-100 mb-1 ${activeTab===1 && isToggleSubmenu===true ? 'active' :''}`} onClick={()=>isOpenSubmenu(1)}>
                 <span className='icon'><FaUserCircle/></span>
                 User
-                <span className='arrow'><FaAngleRight/></span>
+                 <span className='arrow'><FaAngleRight/></span>
             </Button>
+                <div className={`submenuWrapper ${activeTab===1 && isToggleSubmenu===true ? 'colapse': 'colapsed'}`}>
+                <ul className='submenu'>
+                <li><Link to="#">Seller Account</Link></li>
+                <li><Link to="#">Seller Authentication</Link></li>
+                <li><Link to="#">Manage Account</Link></li>
+                <li><Link to="#">Seller Center</Link></li>
+                <li><Link to="#">Managed Payment</Link></li>
+            </ul>
+            </div>
+            
         </li>
         <li>
             <Button className={`w-100 mb-1 ${activeTab===2 && isToggleSubmenu===true ? 'active' :''}`} onClick={()=>isOpenSubmenu(2)}>
@@ -53,10 +63,10 @@ const Sidebar = () => {
             </Button>
             <div className={`submenuWrapper ${activeTab===2 && isToggleSubmenu===true ? 'colapse': 'colapsed'}`}>
                 <ul className='submenu'>
-                <li><Link to="/products">Product List</Link></li>
+                <li><Link to="/products">Product Listing</Link></li>
                 <li><Link to="/product/details">Product View</Link></li>
                 <li><Link to="product/upload">Product Upload</Link></li>
-
+                <li><Link to="product/upload">Market Analyst</Link></li>
             </ul>
             </div>
         </li>
@@ -96,6 +106,27 @@ const Sidebar = () => {
                 <span className='icon'><SiPagekit/></span>
                 Blank Page
             </Button>
+        </li>
+         <li>
+            <Button className={`w-100 mb-1 ${activeTab===9 ? 'active' :''}`} onClick={()=>isOpenSubmenu(9)}>
+                <span className='icon'><FaBusinessTime/></span>
+                Add On
+            </Button>
+        </li>
+         <li>
+             <Button className={`w-100 mb-1 ${activeTab===10 && isToggleSubmenu===true ? 'active' :''}`} onClick={()=>isOpenSubmenu(10)}>
+                <span className='icon'><MdHelp/></span>
+                Help Center
+                <span className='arrow'><FaAngleRight/></span>
+            </Button>
+            <div className={`submenuWrapper ${activeTab===10 && isToggleSubmenu===true ? 'colapse': 'colapsed'}`}>
+                <ul className='submenu'>
+                <li><Link to="#"></Link></li>
+                <li><Link to="#"></Link></li>
+                <li><Link to="#"></Link></li>
+                <li><Link to="#"></Link></li>
+            </ul>
+            </div>
         </li>
       </ul>
       <br/>

@@ -39,23 +39,102 @@ const StyledBreadcrumb = styled(Chip)(({theme})=>{
     };
 });
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps:{
+        style:{
+            maxHeight:ITEM_HEIGHT*4.5 + ITEM_PADDING_TOP,
+            width:250,
+        },
+    },
+};
+
 const ProductUpload = () => {
 
     const fileInputRef = useRef(null);
-
- 
+    
     const handleClick = () => {
     fileInputRef.current.click();
     };
 
     const [categoryVal, setcategoryVal] = useState('');
+    const [subCatVal, setSubCatVal] = useState('');
     const [ratingValue, setRatingValue] = useState(1); 
+    const [productRams, setProductRAMS] = useState([]);
+
+    // const [formFields,setFormFields]= useState({
+    //     name:'',
+    //     images:[],
+    //     color:''
+    // })
+
 
     const handleChangeCategory = (event) => {
         setcategoryVal(event.target.value);
     };
 
-    
+    const handleChangeSubCategory = (event) => {
+        setSubCatVal(event.target.value);
+    };
+
+    // const onChangeFile = (e)=>{
+    //     const arr= [];
+    //     // for (let i=0;i<e.target.files.length;i++){
+    //     // arr.push(e.target.files[i].name);
+    //     // }
+    //     arr.push(e.target.value);
+    //     // 
+        
+    //     setFormFields(()=>({
+    //         ...formFields,
+    //         [e.target.name]:arr,
+    //     }));
+    // }
+
+    // const onChangeInput = (e)=>{
+    //     setFormFields(()=>({
+    //         ...formFields,
+    //         [e.target.name]: e.target.value,
+    //     }))
+    // }
+
+    // const submitForm = async (e)=>{
+    //     e.preventDefault();
+
+    //     const formData = new formData();
+    //     formData.append(`name`,formFields.name)
+    //     formData.append(`color`,formFields.color)
+    //     formData.append(`images`,formFields.images)
+
+    //     try{
+    //         await axios.post("http://localhost:4000/api/category/create" , formFields).then
+    //         ((response)=>{
+    //             console.log(response)
+    //         })
+    //     } catch(err){
+        //  console.log(err)
+        // }
+       // console.log(formFields)
+    // }
+
+
+     const handleChangeProductRams = (event) => {
+        // setProductRams(event.target.value);
+        // setFormFields(()=>({
+        // ...formFields,
+        // productRam: event.target.value
+        // }))
+
+    const{
+        target:{value},
+    }= event;
+    setProductRAMS(
+        // on autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+    );
+    //formFields.productRam = value;
+    };
 
   return (
     <>
@@ -112,9 +191,9 @@ const ProductUpload = () => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem className="text-capitalize" value="Men">Men</MenuItem>
+                                <MenuItem className="text-capitalize" value="Women">Women</MenuItem>
+                                <MenuItem className="text-capitalize" value="Kids">Kids</MenuItem>
                                 </Select>
                              </div>
                             </div>
@@ -191,6 +270,49 @@ const ProductUpload = () => {
                                     <h6>Text Rate </h6>
                                     <input type='text'/>  
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div className='row'>
+                            <div className='col'>
+                             <div className='form-group'>
+                              <h6> Sub Category</h6>
+                                <Select
+                                value={subCatVal}
+                                onChange={handleChangeSubCategory}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
+                                className='w-100'
+                                >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem className="text-capitalize" value="Men">Men</MenuItem>
+                                <MenuItem className="text-capitalize" value="Women">Women</MenuItem>
+                                <MenuItem className="text-capitalize" value="Kids">Kids</MenuItem>
+                                </Select>
+                             </div>
+                            </div>
+
+                            <div className='col'>
+                             <div className='form-group'>
+                              <h6>Product RAMS</h6>
+                                <Select
+                                multiple
+                                value={productRams}
+                                onChange={handleChangeProductRams}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
+                                className='w-100'
+                                MenuProps={MenuProps}
+                                >
+
+                                <MenuItem value="4GB">4GB</MenuItem>
+                                <MenuItem value="8GB">8GB</MenuItem>
+                                <MenuItem value="10GB">10GB</MenuItem>
+                                <MenuItem value="12GB">12GB</MenuItem>
+                                </Select>
+                             </div>
                             </div>
                         </div>
 

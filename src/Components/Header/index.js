@@ -6,7 +6,7 @@ import { MdOutlineMenuOpen } from "react-icons/md";
 import Searchbox from "./Searchbox";
 import { MdOutlineMenu } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
-// import { MdDarkMode } from "react-icons/md";
+ import { MdDarkMode } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
@@ -79,9 +79,12 @@ const Header = () => {
               <Button className="rounded-circle mr-3">
                 <TbWorld />
               </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button className="rounded-circle mr-3" onClick={()=>context.setThemeMode(!context.themeMode)}>
-                <MdLightMode />
-              </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button className="rounded-circle mr-3" onClick={() => context.setThemeMode(!context.themeMode)}>
+                {
+                  context.themeMode ? <MdDarkMode /> : <MdLightMode />
+                }
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <Button className="rounded-circle mr-3">
                 <FaCartShopping />
               </Button>&nbsp;&nbsp;&nbsp;&nbsp;

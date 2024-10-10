@@ -72,7 +72,7 @@ const Dashboard = () => {
                 <DashboardBox color={["#e1950e","#f3cd29"]} icon={<FaUserCircle/>}/>
               </div>
             </div>
-            <div className="col-md-4 pl-0">
+            <div className="col-md-4 pl-0 topPart2">
               <div className="box graphBox">
                 <div className="d-flex w-100 align-items-center justify-content-between bottomEle ">
             <h6 className="text-white mb-0 mt-0 btn-Dash-Title">Total Sales</h6>

@@ -74,7 +74,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className='right-content w-100'>
-        <div className='card shadow border-0 w-100 flex-row p-4 justify-content-between align-items-center'>
+        <div className='card shadow border-0 w-100 flex-row p-4 justify-content-between align-items-center res-col'>
             <h5 className='mb-0'>Product View</h5>
             <Breadcrumbs aria-label='breadcrumb' className='ml-auto breadcrumbs_'>
             <StyledBreadcrumb

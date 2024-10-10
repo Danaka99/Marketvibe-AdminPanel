@@ -21,6 +21,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Divider from '@mui/material/Divider';
 import { MyContext } from "../../App";
+import { IoMdMenu } from "react-icons/io";
 
 
 
@@ -59,14 +60,16 @@ const Header = () => {
         <div className="container-fluid w-100">
           <div className="row w-100">
             {/* Logo Wrapper */}
-            <div className="col-sm-2 d-flex align-items-center part-1">
+            <div className="col-sm-2 d-flex align-items-center part-1 flex-row">
               <Link to={'/'} className="d-flex align-items-center logo">
-                <img src={logo} alt="logo" className="logo-img" />
+                <img src={logo} alt="logo" className="logo-img res-hide" />
                 <span className="ml-2"></span>
               </Link>
             </div>
             {/* Button Wrapper */}
-            <div className="col-sm-3 d-flex align-items-center part-2">
+            {
+              context.windowWidth>992 &&
+              <div className="col-sm-3 d-flex align-items-center part-2 res-hide">
               <Button className="rounded-circle mr-3" onClick={()=>context.setIsToggleSidebar(!context.isToggleSidebar)}>
                 {
                   context.isToggleSidebar===false?   <MdOutlineMenuOpen /> :  <MdOutlineMenu/>
@@ -74,30 +77,35 @@ const Header = () => {
               </Button>&nbsp;&nbsp;
               <Searchbox/>
             </div>
+            }
+            
 
-            <div className="col-sm-7 d-flex align-items-center justify-content-end part-3 ">
-              <Button className="rounded-circle mr-3">
+            <div className="col-sm-7 d-flex align-items-center justify-content-end part-3  gap-2">
+              <Button className="rounded-circle mr-3 res-hide">
                 <TbWorld />
-              </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+              </Button>
+              <Button className="rounded-circle mr-3 normal-hide" onClick={() => context.openNav()}>
+                <IoMdMenu />
+              </Button>
               <Button className="rounded-circle mr-3" onClick={() => context.setThemeMode(!context.themeMode)}>
                 {
                   context.themeMode ? <MdDarkMode /> : <MdLightMode />
                 }
               </Button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <Button className="rounded-circle mr-3">
-                <FaCartShopping />
-              </Button>&nbsp;&nbsp;&nbsp;&nbsp;
               
-              <Button className="rounded-circle mr-3">
+              <Button className="rounded-circle mr-3 res-hide">
+                <FaCartShopping />
+              </Button>
+              
+              <Button className="rounded-circle mr-3 res-hide">
                 <MdEmail />
-              </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+              </Button>
               
               <div className='dropdownWrapper position-relative'>
                 <Button className="rounded-circle mr-3"
               onClick={handleOpennotificationsDrop}>
                 <FaBell />
-              </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+              </Button>
               <Menu
                 className='notification dropdown-list'
                 id="notification"
@@ -313,7 +321,7 @@ const Header = () => {
                     </span>
                 </div>
 
-                <div className="userInfo">
+                <div className="userInfo res-hide">
                     <h4>Chandika Jayaweera</h4>
                     <p className="mb-0">@Chandi2003</p>
                 </div>

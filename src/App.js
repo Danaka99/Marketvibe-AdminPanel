@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import './responsive.css'
 import Dashboard from './pages/Dashboard';
 import Header from './Components/Header';
 import Sidebar from './Components/Header/Sidebar';
@@ -18,7 +19,9 @@ function App() {
   const [isToggleSidebar,setIsToggleSidebar] = useState(false);
   const [isLogin,setIsLogin] = useState(true);
   const [isHideSidebarAndHeader,setIsHideSidebarAndHeader] = useState(false);
+  const [windowWidth,setWindowWidth] = useState(window.innerWidth);
   const [themeMode,setThemeMode] = useState(true);
+  const [isOpenNav,setIsOpenNav] = useState(false);
 
   useEffect(()=>{
     if(themeMode===true){
@@ -33,6 +36,20 @@ function App() {
   },[themeMode])
 
 
+  useEffect(()=>{
+      const handleResize = () =>{
+      setWindowWidth(window.innerWidth);
+  };
+    window.addEventListener('resize',handleResize);
+  return()=>{
+    window.removeEventListener('resize',handleResize)
+  };
+  });
+
+  const openNav=()=>{
+    setIsOpenNav(true);
+  }
+
   const values={
     isToggleSidebar,
     setIsToggleSidebar,
@@ -41,7 +58,11 @@ function App() {
     isHideSidebarAndHeader,
     setIsHideSidebarAndHeader,
     themeMode,
-    setThemeMode
+    setThemeMode,
+    windowWidth,
+    openNav,
+    isOpenNav,
+    setIsOpenNav
   }
 
   return (
@@ -52,12 +73,15 @@ function App() {
        }
     
     <div className='main d-flex'>
-      {
-        isHideSidebarAndHeader!==true &&
-        <div className={`sidebarWrapper ${isToggleSidebar===true ? 'toggle' : ''}`}>
-          <Sidebar/>
-      </div>
-      }
+      {isHideSidebarAndHeader!==true && (
+           <>
+       <div className={`sideBarOverLay d-none ${isOpenNav===true && 'show'}`} onClick={()=>setIsOpenNav(false)}>  </div>
+        <div className={`sidebarWrapper ${isToggleSidebar ? 'toggle' : ''} ${isOpenNav===true ? 'open' : ''}
+        `}> 
+        <Sidebar /> 
+        </div>
+       </>
+      )}
       
       <div className={`content ${isHideSidebarAndHeader===true && 'full'} ${isToggleSidebar===true ? 'toggle' : ''}` }>
       <Routes>

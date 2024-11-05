@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import './responsive.css'
+// import './ChatBox.css'
+// import './Description.css'
 import Dashboard from './pages/Dashboard';
 import Header from './Components/Header';
 import Sidebar from './Components/Header/Sidebar';
@@ -9,15 +11,19 @@ import { createContext, useEffect, useState } from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductDetails from './pages/ProductDetails';
-import Products from './pages/Dashboard/Products';
+import Products from './pages/Dashboard/components/Products';
+import Category from './pages/Dashboard/Category';
 import ProductUpload from './pages/ProductUpload';
+import SellerAcount from './pages/SellerAccount';
+import ManagedAccount from './pages/ManagedAccount';
+import CategoryAdd from './pages/CategoryAdd';
 
 const MyContext = createContext();
 
 function App() {
 
   const [isToggleSidebar,setIsToggleSidebar] = useState(false);
-  const [isLogin,setIsLogin] = useState(true);
+  const [isLogin,setIsLogin] = useState(false);
   const [isHideSidebarAndHeader,setIsHideSidebarAndHeader] = useState(false);
   const [windowWidth,setWindowWidth] = useState(window.innerWidth);
   const [themeMode,setThemeMode] = useState(true);
@@ -92,6 +98,10 @@ function App() {
         <Route path='/products' exact={true} element={<Products />} />
         <Route path='/product/details' exact={true} element={<ProductDetails />} />
         <Route path='/product/upload' exact={true} element={<ProductUpload />} />
+        <Route path='/seller' exact={true} element={<SellerAcount />} />
+        <Route path='/managedaccount' exact={true} element={<ManagedAccount />} />
+        <Route path='/category/add' exact={true} element={<CategoryAdd />} />
+        <Route path='/category' exact={true} element={<Category/>} />
       </Routes>
       </div>
     </div>

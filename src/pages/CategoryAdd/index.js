@@ -6,10 +6,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Button } from '@mui/material';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { postData } from '../../utils/api';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
+import { MyContext } from '../../App';
+
 
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
     
@@ -44,6 +46,7 @@ const ProductUpload = () => {
     });
 
     const history = useNavigate();
+    const context=useContext(MyContext);
 
     const changeInput = (e) =>{
     setFormFields(()=>(
@@ -77,6 +80,15 @@ const ProductUpload = () => {
                 setIsLoading(false);
                 history('/category')
             })
+        }
+
+        else{
+            context.setAlertBox({
+                open:true,
+                error:true,
+                msg:"please fill all the details"
+            });
+            return false;
         }
     }
     

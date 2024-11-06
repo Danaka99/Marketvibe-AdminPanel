@@ -2,7 +2,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { emphasize, styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
-import React from 'react';
+import React, { useContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from "@mui/material/Button";
 import { FaPencilAlt } from "react-icons/fa";
@@ -18,6 +18,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { MyContext } from '../../../App';
 
 //breadcrumb code
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
@@ -56,15 +57,19 @@ const Category = () => {
         color:''
     });
 
-  
-  useEffect(()=>{
-    window.scrollTo(0,0);
+  const context=useContext(MyContext);
 
-    fetchDataFromApi('/api/category').then((res)=>{
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    context.setProgress(20);
+    fetchDataFromApi('/api/category').then((res) => {
       setCatData(res);
       console.log(res);
-    })
-  },[]);
+      context.setProgress(100);
+    });
+  }, []);
+
 
 
   const handleClose = () => {
@@ -116,13 +121,23 @@ const Category = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    context.setProgress(40);
     editData(`/api/category/${editId}` , formFields).then((res)=>{
       
       fetchDataFromApi('/api/category').then((res)=>{
       setCatData(res);
       setOpen(false);
       setIsLoading(false);
-    })
+    });
+
+    context.setAlertBox({
+      open:true,
+      error:false,
+      msg:'the category updated!'
+    });
+
+    context.setProgress(100);
+
     })
   }
 
@@ -135,8 +150,10 @@ const Category = () => {
  }
 
  const handleChange = (event,value)=>{
+  context.setProgress(40);
   fetchDataFromApi(`/api/category?page=${value}`).then((res)=>{
     setCatData(res);
+    context.setProgress(100);
   })
  };
 
@@ -234,7 +251,8 @@ const Category = () => {
         <form>
         <DialogTitle>Edit Category</DialogTitle>
         <DialogContent>
-          <TextField
+          <div className='form-group mb-3'>
+            <TextField
             autoFocus
             required
             margin="dense"
@@ -246,6 +264,9 @@ const Category = () => {
             value={formFields.name}
             onChange={changeInput}
           />
+          </div>
+
+          <div className='form-group mb-3'>
           <TextField
             autoFocus
             required
@@ -258,6 +279,9 @@ const Category = () => {
             value={formFields.images}
             onChange={addImgUrl}
           />
+          </div>
+
+          <div className='form-group mb-3'>
           <TextField
             autoFocus
             required
@@ -270,6 +294,7 @@ const Category = () => {
             value={formFields.color}
             onChange={changeInput}
           />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant='outlined'>Cancel</Button>

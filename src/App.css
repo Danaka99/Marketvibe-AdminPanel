@@ -20,6 +20,10 @@ h1,h2,h3,h4,h5,h6,p{color: #39374d;}
 
 h4{line-height: 32px;}
 
+.topLoadingBar{height: 3px !important; background: #1866ee !important;}
+body.dark .topLoadingBar {height: 3px !important;background: #fff !important;
+}
+
 .btn-blue{background: #0858f7 !important; font-size: 14px !important; font-weight: 600; color: #fff !important; 
   text-transform: capitalize !important; border-radius: 5px !important ; border-radius: 8px !important;}
 body.dark .btn-blue{
@@ -42,7 +46,7 @@ button .loader{width: 25px !important; height: 25px !important;}
 
 .btn-big{padding: 8px 25px !important; font-size: 16px !important;}
 body.dark .btn-big{border: 1px solid rgba(255, 255, 255, 0.1) !important;}
-.btn-big svg{font-size: 25px !important; margin-left: 7px;}
+.btn-big svg{font-size: 25px !important;}
 
 .full{max-width: 100% !important; flex: 0 0 100% !important; width: 100% !important; }
 .link{color: #5e5d72; font-weight: 600;}

@@ -45,10 +45,11 @@ const Category = () => {
 
   const [catData, setCatData] = useState([]); 
   const [open, setOpen] = React.useState(false);
-
   
   const [editId, setEditId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [page, setPage] = useState(1);
 
   const [formFields,setFormFields]=useState({
         name:'',
@@ -134,6 +135,12 @@ const Category = () => {
   })
  }
 
+ const handleChange = (event,value)=>{
+  fetchDataFromApi(`/api/category?page=${value}`).then((res)=>{
+    setCatData(res);
+  })
+ };
+
 
   return (
     <>
@@ -172,7 +179,7 @@ const Category = () => {
               </thead>
               <tbody>
                 {
-                  catData.length!==0 && catData?.map((item,index)=>{
+                  catData?.categoryList?.length!==0 && catData?.categoryList?.map((item,index)=>{
                     return(
                          <tr>
                           <td><Checkbox/>#{index+1}</td>
@@ -206,9 +213,11 @@ const Category = () => {
               </tbody>
             </table>
              <div className="d-flex tableFooter">
-              <p>showing <b>12</b> of <b>60</b> results</p>
-              <Pagination count={100} color="primary" className="pagination"
-              showFirstButton showLastButton/>
+              {/* <p>showing <b>{page}</b> of <b>{catData?.length}</b> results</p> */}
+              {/* <Pagination count={page} color="primary" className="pagination"
+              showFirstButton showLastButton/> */}
+               <Pagination count={catData?.totalPages} color="primary" className="pagination"
+              showFirstButton showLastButton onChange={handleChange}/>
              </div>
           </div>
 

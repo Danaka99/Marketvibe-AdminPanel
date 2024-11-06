@@ -226,7 +226,7 @@ body.dark .logoutWrapper .logoutBox::after {background: #fff}
 
 .logoutWrapper .logoutBox button{font-size: 14px !important; font-weight: 600 !important;}
 .logoutWrapper .logoutBox button svg{margin-right: 5px; font-size: 18px !important;}
-body.dark .logoutWrapper .logoutBox button{background-color: #292929 !important;}
+body.dark .logoutWrapper .logoutBox button{background-color: #!important;}
 
 .main .content{width: 80%; flex:0 0 80%; transition: all 0.3s;}
 .main .content.toggle {width: 100%; flex: 0 0 100%;}
@@ -574,6 +574,27 @@ body.dark .ImgUpload {color: #403e57 !important;}
 
 .dot{display: block;width: 10px; height: 10px; border-radius: 100%;}
 .editModal .css-rsks93-MuiPaper-root-MuiDialog-paper{width: 600px !important;}
+
+body.dark .css-18pjc51-MuiFormLabel-root-MuiInputLabel-root, 
+body.dark .css-1jk99ih-MuiInputBase-input-MuiOutlinedInput-input,
+body.dark .AddCatCheckBox{color: rgba(255, 255, 255, 0.8) !important;}
+body.dark .css-b4yaxo-MuiButtonBase-root-MuiButton-root{background-color:#292929 !important; color: rgba(255, 255, 255, 0.8) !important; border-color: #fff !important;}
+body.dark .css-142372x-MuiButtonBase-root-MuiButton-root{background-color: rgba(255, 255, 255, 0.8) !important; color: #292929 !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .customTabs ul li {

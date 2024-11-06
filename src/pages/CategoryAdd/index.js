@@ -68,14 +68,16 @@ const ProductUpload = () => {
 
     const addCategory = (e)=>{
         e.preventDefault();
-        setIsLoading(true);
+
+        if(formFields.name!=="" && formFields.images.length!==0 && formFields.color!=="" ){
+            setIsLoading(true);
 
 
-        postData('/api/category/create',formFields).then(res=>{
-            setIsLoading(false);
-            history('/category')
-        })
-      
+            postData('/api/category/create',formFields).then(res=>{
+                setIsLoading(false);
+                history('/category')
+            })
+        }
     }
     
 

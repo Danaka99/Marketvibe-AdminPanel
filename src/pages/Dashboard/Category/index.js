@@ -11,6 +11,7 @@ import Pagination from '@mui/material/Pagination';
 import { useEffect, useState } from 'react';
 import { deleteData, editData, fetchDataFromApi } from '../../../utils/api';
 import { Checkbox } from '@mui/material';
+import { Link } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -48,8 +49,6 @@ const Category = () => {
   
   const [editId, setEditId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [page, setPage] = useState(1);
 
   const [formFields,setFormFields]=useState({
         name:'',
@@ -147,6 +146,8 @@ const Category = () => {
       <div className='right-content w-100'>
         <div className='card shadow border-0 w-100 flex-row p-4 justify-content-between align-items-center'>
             <h5 className='mb-0'>Category List</h5>
+
+            <div className='ml-auto d-flex align-items-center'>
             <Breadcrumbs aria-label='breadcrumb' className='ml-auto breadcrumbs_'>
             <StyledBreadcrumb
             component="a"
@@ -161,7 +162,9 @@ const Category = () => {
             href="#"
             />
 
-            </Breadcrumbs>
+            </Breadcrumbs>&nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to="/category/add"><Button className='btn-blue ml-3 pl-3 pr-5'> Add Category</Button></Link>
+            </div>
         </div>
         <div className="card shadow border-0 p-3 mt-4">
             
@@ -182,7 +185,7 @@ const Category = () => {
                   catData?.categoryList?.length!==0 && catData?.categoryList?.map((item,index)=>{
                     return(
                          <tr>
-                          <td><Checkbox/>#{index+1}</td>
+                          <td><Checkbox className='AddCatCheckBox'/>#{index+1}</td>
                           <td>
                             <div className="d-flex align-items-center productBox">
                               <div className="imgWrapper">

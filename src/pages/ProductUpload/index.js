@@ -4,17 +4,16 @@ import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
-import Rating from '@mui/material/Rating';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { IoCloseSharp } from 'react-icons/io5'; 
+//import { IoCloseSharp } from 'react-icons/io5'; 
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import React, { useRef } from 'react';
-import { FaRegImages } from 'react-icons/fa';
-
+import Rating from '@mui/material/Rating';
+import React from 'react';
+import { fetchDataFromApi, postData } from '../../utils/api';
+import { MyContext } from '../../App';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
     
@@ -39,102 +38,221 @@ const StyledBreadcrumb = styled(Chip)(({theme})=>{
     };
 });
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps:{
-        style:{
-            maxHeight:ITEM_HEIGHT*4.5 + ITEM_PADDING_TOP,
-            width:250,
-        },
-    },
-};
+
 
 const ProductUpload = () => {
 
-    const fileInputRef = useRef(null);
-    
-    const handleClick = () => {
-    fileInputRef.current.click();
-    };
-
     const [categoryVal, setcategoryVal] = useState('');
-    const [subCatVal, setSubCatVal] = useState('');
+    const [isFeaturedValue,setIsFeaturedValue] = useState(false);
     const [ratingValue, setRatingValue] = useState(1); 
-    const [productRams, setProductRAMS] = useState([]);
+    const [catData, setCatData] = useState([]); 
+    const [isLoading, setIsLoading] = useState(false);
 
-    // const [formFields,setFormFields]= useState({
-    //     name:'',
-    //     images:[],
-    //     color:''
-    // })
+    // const [count, setCount] = useState(0);
+    const[productImagesArr, setproductImageArr]= useState([]); 
 
+    const [formFields,setFormFields]= useState({
+        name:'',
+        description:'',
+        brand:'',
+        price:0,
+        oldPrice:0,
+        Category:'',
+        countInStock:0,
+        rating:0,
+        isFeatured:null,
+    })
+
+    const productImages= useRef();
+    const context = useContext(MyContext);
+
+    useEffect(() => {
+    window.scrollTo(0,0);
+    context.setProgress(20);
+
+    fetchDataFromApi('/api/category').then((res) => {
+        setCatData(res);
+        context.setProgress(100);
+    })
+    
+    },[]);
 
     const handleChangeCategory = (event) => {
         setcategoryVal(event.target.value);
+        setFormFields(()=>({
+        ...formFields,
+        category:event.target.value
+    }))
     };
 
-    const handleChangeSubCategory = (event) => {
-        setSubCatVal(event.target.value);
+    const handleChangeisFeaturedValue = (event) => {
+        setIsFeaturedValue(event.target.value);
+        setFormFields(()=>({
+        ...formFields,
+        isFeatured:event.target.value
+    }))
     };
 
-    // const onChangeFile = (e)=>{
-    //     const arr= [];
-    //     // for (let i=0;i<e.target.files.length;i++){
-    //     // arr.push(e.target.files[i].name);
-    //     // }
-    //     arr.push(e.target.value);
-    //     // 
+    
+    // const addProductImages=()=>{
+
+    //    const arr=[];
+    //    const imgGrid = document.querySelector('#imgGrid');
+
+    //    const imgData = `<div class="img">
+    //                     <img src="${productImages.current.value}" alt="image
+    //                     class="w-100 fit-image" 
+    //                     style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
+    //                     </div>`;
+    //     arr[parseInt(count)]=productImages.current.value;
+    //     setCount(count+1);
         
     //     setFormFields(()=>({
-    //         ...formFields,
-    //         [e.target.name]:arr,
-    //     }));
+    //     ...formFields,
+    //     images:arr
+    // }))
+
+
+    //     imgGrid.insertAdjacentHTML('beforeend' , imgData);
+    //     productImages.current.value="";                
     // }
 
-    // const onChangeInput = (e)=>{
-    //     setFormFields(()=>({
-    //         ...formFields,
-    //         [e.target.name]: e.target.value,
-    //     }))
-    // }
+  const addProductImages = () =>{
+    setproductImageArr(prevArray => [...prevArray,productImages.current.value]);
+    productImages.current.value="";
+  }
 
-    // const submitForm = async (e)=>{
-    //     e.preventDefault();
+  const inputChange=(e)=>{
+    setFormFields(()=>({
+        ...formFields,
+        [e.target.name]:e.target.value
+    }))
+  }
 
-    //     const formData = new formData();
-    //     formData.append(`name`,formFields.name)
-    //     formData.append(`color`,formFields.color)
-    //     formData.append(`images`,formFields.images)
+  const addProduct=(e)=>{
+    e.preventDefault();
 
-    //     try{
-    //         await axios.post("http://localhost:4000/api/category/create" , formFields).then
-    //         ((response)=>{
-    //             console.log(response)
-    //         })
-    //     } catch(err){
-        //  console.log(err)
-        // }
-       // console.log(formFields)
-    // }
+    formFields.images = productImagesArr;
 
+    if(formFields.name===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product name',
+            error:true
+        });
+        return false;
+    }
 
-     const handleChangeProductRams = (event) => {
-        // setProductRams(event.target.value);
-        // setFormFields(()=>({
-        // ...formFields,
-        // productRam: event.target.value
-        // }))
+    if(formFields.description===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product description',
+            error:true
+        });
+        return false;
+    }
 
-    const{
-        target:{value},
-    }= event;
-    setProductRAMS(
-        // on autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-    );
-    //formFields.productRam = value;
-    };
+    if(formFields.brand===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product brand',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.price===0 && formFields.price===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product price',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.oldPrice===0 && formFields.oldPrice===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product oldPrice',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.category===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please select a category',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.countInStock===0 && formFields.countInStock===""){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product count in stock',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.rating===0){
+        context.setAlertBox({
+            open:true,
+            msg:'Please select product rating',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.isFeatured===null){
+        context.setAlertBox({
+            open:true,
+            msg:'Please select the product is a featured or not',
+            error:true
+        });
+        return false;
+    }
+
+    if(formFields.images.length===0){
+        context.setAlertBox({
+            open:true,
+            msg:'Please add product images',
+            error:true
+        });
+        return false;
+    }
+    setIsLoading(true);
+    
+    postData('/api/products/create',formFields).then((res)=>{
+        context.setAlertBox({
+            open:true,
+            msg:'the product is created!',
+            error:false
+        });
+        setIsLoading(true);
+
+        setFormFields({
+        name:'',
+        description:'',
+        brand:'',
+        price:0,
+        oldPrice:0,
+        Category:'',
+        countInStock:0,
+        rating:0,
+        isFeatured:false,
+        images:[]
+        })
+        
+    })
+  }
+
+//   const addProduct=(e)=>{
+//     e.preventDefault(formFields);
+//     console.log(formFields);
+//   }
 
   return (
     <>
@@ -163,18 +281,18 @@ const ProductUpload = () => {
             </Breadcrumbs>
         </div>
 
-        <form className='form'>
+        <form className='form' onSubmit={addProduct}>
             <div className='row'>
                 <div className='col-sm-12'>
                     <div className='card p-4'>
                         <h5 className='mb-4'>Basic Information</h5>
                         <div className='form-group'>
-                            <h6>Title</h6>
-                            <input type='text' name='name'/>  
+                            <h6>Product Name</h6>
+                            <input type='text' name='name' value={formFields.name} onChange={inputChange}/>  
                         </div>
                         <div className='form-group'>
                             <h6>Description</h6>
-                            <textarea rows={10} cols={20}/>  
+                            <textarea rows={10} cols={20} name='description' value={formFields.description} onChange={inputChange}/>  
                         </div>
 
                         <div className='row'>
@@ -191,9 +309,13 @@ const ProductUpload = () => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem className="text-capitalize" value="Men">Men</MenuItem>
-                                <MenuItem className="text-capitalize" value="Women">Women</MenuItem>
-                                <MenuItem className="text-capitalize" value="Kids">Kids</MenuItem>
+                                {
+                                    catData?.categoryList?.length !== 0 && catData?.categoryList?.map((cat,index)=>{
+                                        return(
+                                             <MenuItem value={cat.id} key={index}>{cat.name}</MenuItem>
+                                        )
+                                    })
+                                }
                                 </Select>
                              </div>
                             </div>
@@ -201,20 +323,7 @@ const ProductUpload = () => {
                             <div className='col'>
                              <div className='form-group'>
                               <h6>Brand</h6>
-                                <Select
-                                value={categoryVal}
-                                onChange={handleChangeCategory}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                                className='w-100'
-                                >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
+                                <input type='text' name='brand' value={formFields.brand} onChange={inputChange}/>  
                              </div>
                             </div>
                         </div>
@@ -222,17 +331,47 @@ const ProductUpload = () => {
                         <div className='row'>
                         <div className='col'>
                             <div className='form-group'>
-                            <h6>Regular Price</h6>
-                                <input type='text'/>  
+                            <h6>New Price</h6>
+                                <input type='text' name='price' value={formFields.price} onChange={inputChange}/>  
                             </div>
                         </div>
 
                         <div className='col'>
                             <div className='form-group'>
-                                <h6>Discount Price</h6>
-                                <input type='text'/>  
+                                <h6>Old Price</h6>
+                                <input type='text' name='oldPrice' value={formFields.oldPrice} onChange={inputChange}/>  
                             </div>
                         </div>
+                        </div>
+
+                        <div className='row'>
+                            <div className='col'>
+                                <div className='col'>
+                                <div className='form-group'>
+                                    <h6>Is Featured </h6>
+                                <Select
+                                value={isFeaturedValue}
+                                onChange={handleChangeisFeaturedValue}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
+                                className='w-100'
+                                >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={true}>True</MenuItem>
+                                <MenuItem value={false}>False</MenuItem>
+                                </Select>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div className='col'>
+                                <div className='form-group'>
+                                    <h6>Product Stock </h6>
+                                    <input type='text' name='countInStock' value={formFields.countInStock} onChange={inputChange}/>  
+                                </div>
+                            </div>
                         </div>
 
                         <div className='row'>
@@ -244,119 +383,71 @@ const ProductUpload = () => {
                                         value={ratingValue}
                                         onChange={(event, newValue) => {
                                         setRatingValue(newValue);
+                                         setFormFields(()=>({
+                                        ...formFields,
+                                        rating:newValue
+                                         }))
                                         }}
                                     /> 
                                 </div>
                             </div>
-
-                            <div className='col'>
-                                <div className='form-group'>
-                                    <h6>Product Stock </h6>
-                                    <input type='text'/>  
-                                </div>
-                            </div>
                         </div>
 
                         <div className='row'>
                             <div className='col'>
                                 <div className='form-group'>
-                                <h6>Shopping Fee </h6>
-                                <input type='text'/>  
-                                </div>
-                            </div>
-
-                            <div className='col'>
-                                <div className='form-group'>
-                                    <h6>Text Rate </h6>
-                                    <input type='text'/>  
+                                    <h6>Product Images</h6>
+                                    <div className='position-relative inputBtn'>
+                                        <input type='text' ref={productImages} name='images' onChange={inputChange}/>
+                                        <Button type='button' className='btn-blue'  
+                                        onClick={addProductImages}>Add</Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div className='row'>
-                            <div className='col'>
-                             <div className='form-group'>
-                              <h6> Sub Category</h6>
-                                <Select
-                                value={subCatVal}
-                                onChange={handleChangeSubCategory}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                                className='w-100'
-                                >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem className="text-capitalize" value="Men">Men</MenuItem>
-                                <MenuItem className="text-capitalize" value="Women">Women</MenuItem>
-                                <MenuItem className="text-capitalize" value="Kids">Kids</MenuItem>
-                                </Select>
-                             </div>
-                            </div>
 
-                            <div className='col'>
-                             <div className='form-group'>
-                              <h6>Product RAMS</h6>
-                                <Select
-                                multiple
-                                value={productRams}
-                                onChange={handleChangeProductRams}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                                className='w-100'
-                                MenuProps={MenuProps}
-                                >
-
-                                <MenuItem value="4GB">4GB</MenuItem>
-                                <MenuItem value="8GB">8GB</MenuItem>
-                                <MenuItem value="10GB">10GB</MenuItem>
-                                <MenuItem value="12GB">12GB</MenuItem>
-                                </Select>
-                             </div>
-                            </div>
-                        </div>
-
-
-                        <div className='form-group'>
-                            <h6>Tags</h6>
-                            <textarea rows={10} cols={20}/>  
-                        </div>
                     </div>
                     <div className='card p-4 mt-0'>
                             <div className='imagesUploadSec'>
                                 <h5 class="mb-4">Media and Published</h5><br/>
 
-                                <div className='imgUploadBox d-flex align-items-center'>
+                                {/* <div className='imgUploadBox d-flex align-items-center'>
                                     <div className='uploadBox'>
                                     <span className='remove'>
                                             <IoCloseSharp/>
                                     </span>
-                                        <div className='box'>
-                                            <LazyLoadImage
-                                            alt={"image"}
-                                            effect="blur"
-                                            className="w-100"
-                                            src={`https://mironcoder-hotash.netlify.app/images/product/single/01.webp`}/>
+                                            <div className='box'>
+                                            <div className='imgGrid d-flex' id='imgGrid'>
+                                            
+                                            </div>
                                         </div>
+                                    </div>  
+                                </div> */}
+
+                                {/* <div className='stickyBox'>
+                                    <div className='imgGrid d-flex' id='imgGrid'>
                                     </div>
-                                    <div className='uploadBox'>
-                                    <div className='info w-100' onClick={handleClick}>
-                                    <input
-                                        type='file'
-                                        hidden
-                                        multiple
-                                        name="images"
-                                        ref={fileInputRef}
-                                        />
-                                        <FaRegImages className='IconUpload align-items-center justify-content-center w-100' />
-                                        <h5 className='ImgUpload'>Image Upload</h5>
-                        </div>
-                    </div>
-                </div>
+                                </div> */}
+                                <div className='stickyBox'>
+                                    {
+                                        productImagesArr?.length !==0 && 
+                                        <h4>Product Images</h4>
+                                    }
+                                    <div className='imgGrid d-flex' id='imgGrid'>
+                                        {
+                                        productImagesArr?.map((image, index) => (
+                                            <div className='img' key={index}>
+                                            <img src={image} alt="images" className='w-100' />
+                                            </div>
+                                        ))
+                                        }
+                                    </div>
+                                </div>
+                                
                 <br/>
                 
-                <Button type='submit' className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
-                PUBLISH AND VIEW</Button>
+                <Button type='submit' onClick={addProduct} className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
+                {isLoading === true ? <CircularProgress color="inherit" className='loader'/> : 'PUBLISH AND VIEW'}</Button>
                 
                       </div>
                     </div>

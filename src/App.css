@@ -542,7 +542,7 @@ body.light .reviewForm textarea::--webkit-input-placeholder{color: rgba(0,0,0,0.
 .form .form-group{margin-bottom: 25px;}
 .form .form-group h6{margin-bottom: 10px; font-size: 15px;}
 .form .form-group input,.form .form-group textarea{background: #fafafa; width: 100%; outline: none !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important; height: 40px; padding-left: 15px; border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important; height: 55px; padding-left: 15px; border-radius: 5px;
   font-size: 14 px;}
 .form .form-group textarea{height: 120px; padding-top: 15px;}
 
@@ -556,8 +556,18 @@ body.dark .form .form-group input, body.dark .form .form-group textarea{backgrou
 body.dark .imgUploadBox .uploadBox{border: 1px dashed #292929 !important;}
 
 
-.imgUploadBox .uploadBox .box{width: 100%; height: 150px !important;}
+.imgUploadBox .uploadBox .box{width: 100%; height: 150px !important; overflow: hidden;position: relative;}
 .imgUploadBox .uploadBox .box .lazy-load-image-background{ padding: 2.5px; height: 100% !important;width: 100% !important;}
+
+
+
+
+
+.stickyBox{position: sticky;top: 100px;}
+.imgGrid{width: 100%; flex-wrap: nowrap; gap: 5px;}
+.imgGrid .img{width:150px; height: 150px; overflow: hidden; border-radius: 7px;border: 1px dashed #0000004d;}
+.imgGrid .img img{width: 150px; height: 150px; object-fit: cover;}
+
 
 .imgUploadBox .uploadBox .remove{align-items: center;background: #d32f2f;border-radius: 50%;cursor: pointer;display: flex;
   height: 20px;justify-content: center;position: absolute;right: -7px;top: -7px; width: 20px;z-index: 100;}
@@ -585,7 +595,7 @@ body.dark .AddCatCheckBox{color: rgba(255, 255, 255, 0.8) !important;}
 body.dark .css-b4yaxo-MuiButtonBase-root-MuiButton-root{background-color:#292929 !important; color: rgba(255, 255, 255, 0.8) !important; border-color: #fff !important;}
 body.dark .css-142372x-MuiButtonBase-root-MuiButton-root{background-color: rgba(255, 255, 255, 0.8) !important; color: #292929 !important;}
 
-
+.inputBtn button{position: absolute; top: 10px; right: 10px; z-index: 100;}
 
 
 

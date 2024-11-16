@@ -43,7 +43,7 @@ const StyledBreadcrumb = styled(Chip)(({theme})=>{
 const ProductUpload = () => {
 
     const [categoryVal, setcategoryVal] = useState('');
-    const [isFeaturedValue,setIsFeaturedValue] = useState(false);
+    const [isFeaturedValue,setIsFeaturedValue] = useState('');
     const [ratingValue, setRatingValue] = useState(1); 
     const [catData, setCatData] = useState([]); 
     const [isLoading, setIsLoading] = useState(false);
@@ -55,10 +55,10 @@ const ProductUpload = () => {
         name:'',
         description:'',
         brand:'',
-        price:0,
-        oldPrice:0,
+        price:null,
+        oldPrice:null,
         Category:'',
-        countInStock:0,
+        CountInStock:null,
         rating:0,
         isFeatured:null,
     })
@@ -118,9 +118,10 @@ const ProductUpload = () => {
     // }
 
   const addProductImages = () =>{
-    setproductImageArr(prevArray => [...prevArray,productImages.current.value]);
-    productImages.current.value="";
+     setproductImageArr(prevArray => [...prevArray,productImages.current.value]);
+     productImages.current.value="";
   }
+  
 
   const inputChange=(e)=>{
     setFormFields(()=>({
@@ -161,7 +162,7 @@ const ProductUpload = () => {
         return false;
     }
 
-    if(formFields.price===0 && formFields.price===""){
+    if(formFields.price===null){
         context.setAlertBox({
             open:true,
             msg:'Please add product price',
@@ -170,7 +171,7 @@ const ProductUpload = () => {
         return false;
     }
 
-    if(formFields.oldPrice===0 && formFields.oldPrice===""){
+    if(formFields.oldPrice===null){
         context.setAlertBox({
             open:true,
             msg:'Please add product oldPrice',
@@ -188,7 +189,7 @@ const ProductUpload = () => {
         return false;
     }
 
-    if(formFields.countInStock===0 && formFields.countInStock===""){
+    if(formFields.CountInStock===null){
         context.setAlertBox({
             open:true,
             msg:'Please add product count in stock',
@@ -307,7 +308,7 @@ const ProductUpload = () => {
                                 className='w-100'
                                 >
                                 <MenuItem value="">
-                                    <em>None</em>
+                                    <em value={null}>None</em>
                                 </MenuItem>
                                 {
                                     catData?.categoryList?.length !== 0 && catData?.categoryList?.map((cat,index)=>{
@@ -357,7 +358,7 @@ const ProductUpload = () => {
                                 className='w-100'
                                 >
                                 <MenuItem value="">
-                                    <em>None</em>
+                                    <em value={null}>None</em>
                                 </MenuItem>
                                 <MenuItem value={true}>True</MenuItem>
                                 <MenuItem value={false}>False</MenuItem>
@@ -369,7 +370,7 @@ const ProductUpload = () => {
                             <div className='col'>
                                 <div className='form-group'>
                                     <h6>Product Stock </h6>
-                                    <input type='text' name='countInStock' value={formFields.countInStock} onChange={inputChange}/>  
+                                    <input type='text' name='CountInStock' value={formFields.countInStock} onChange={inputChange}/>  
                                 </div>
                             </div>
                         </div>
@@ -398,7 +399,7 @@ const ProductUpload = () => {
                                 <div className='form-group'>
                                     <h6>Product Images</h6>
                                     <div className='position-relative inputBtn'>
-                                        <input type='text' ref={productImages} name='images' onChange={inputChange}/>
+                                        <input type='text'  required ref={productImages} name='images' onChange={inputChange}/>
                                         <Button type='button' className='btn-blue'  
                                         onClick={addProductImages}>Add</Button>
                                     </div>

@@ -9,7 +9,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Pagination from '@mui/material/Pagination';
 import { useContext, useEffect, useState } from 'react';
-import { fetchDataFromApi } from '../../../../utils/api';
+import { deleteData, fetchDataFromApi } from '../../../../utils/api';
 import { MyContext } from '../../../../App';
 import Rating from '@mui/material/Rating';
 
@@ -45,12 +45,27 @@ const Products = () => {
 
   useEffect(()=>{
     window.scrollTo(0,0);
-
+    context.setProgress(40);
     fetchDataFromApi("/api/products").then((res)=>{
-      console.log(res);
       setProductList(res)
+      context.setProgress(100);
     })
   },[]);
+
+  const deleteProduct=(id)=>{
+    context.setProgress(40);
+    deleteData(`/api/products/${id}`).then((res)=>{
+      context.setProgress(100);
+      context.setAlertBox({
+        open:true,
+        error:true,
+        msg:'Product Deleted!'
+      });
+      fetchDataFromApi("/api/products").then((res)=>{
+        setProductList(res);
+    })
+    })
+  }
 
   return (
     <>
@@ -102,7 +117,7 @@ const Products = () => {
                       <div className="d-flex align-items-center productBox">
                         <div className="imgWrapper">
                           <div className="img">
-                            <img src={`${context.baseUrl}/uploads/${item.images[0]}`} alt="" className="w-100"/>
+                            <img src={`${context.baseUrl}/uploads/${item.images[0]}`} alt="pic" className="w-100"/>
                           </div>
                         </div>
                         <div className="info">
@@ -111,7 +126,7 @@ const Products = () => {
                         </div>
                       </div>
                     </td>
-                    <td>{item.category.name}</td>
+                    <td>{item.category ? item.category.name : "N/A"}</td>
                     <td>{item.brand}</td>
                     <td>
                       <div style={{width:'60px'}}>
@@ -127,7 +142,7 @@ const Products = () => {
                       <div className="actions d-flex align-items-center">
                         <Button className="secondary" color="secondary"><FaEye/></Button>
                         <Button className="success" color="success"><FaPencilAlt/></Button>
-                        <Button className="error" color="error"><MdDelete/></Button>
+                        <Button className="error" color="error" onClick={()=>deleteProduct(item._id)}><MdDelete/></Button>
                       </div>
                     </td>
 

@@ -6,12 +6,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Button } from '@mui/material';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import React, { useContext, useState } from 'react';
-import { postData } from '../../utils/api';
+import React, { useContext, useEffect, useState } from 'react';
+import { fetchDataFromApi, postData } from '../../utils/api';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App';
-
+import { FaRegImages } from 'react-icons/fa';
 
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
     
@@ -45,8 +45,42 @@ const ProductUpload = () => {
         color:''
     });
 
+    const [previews,setPreviews] = useState([]);
+    const [files, setFiles]= useState([]);
+    const [imagefiles,setImageFiles] = useState();
+
+    const fd= new FormData();
+
     const history = useNavigate();
     const context=useContext(MyContext);
+
+    // useEffect(() => {
+    // window.scrollTo(0,0);
+    // context.setProgress(20);
+
+    // fetchDataFromApi('/api/category').then((res) => {
+    //     setCatData(res);
+    //     context.setProgress(100);
+    // })
+    
+    // },[]);
+
+    useEffect(()=>{
+        if(!imagefiles) return;
+        let tmp = [];
+        for (let i=0; i<imagefiles.length; i++){
+            tmp.push(URL.createObjectURL(imagefiles[i]));
+        }
+        const objectUrls = tmp;
+        setPreviews(objectUrls);
+
+        //free memory
+        for(let i=0; i<objectUrls.length;i++){
+            return()=>{
+                URL.revokeObjectURL(objectUrls[i])
+            }
+        }
+    },[imagefiles])
 
     const changeInput = (e) =>{
     setFormFields(()=>(
@@ -57,22 +91,13 @@ const ProductUpload = () => {
     ))
     }
 
-    const addImgUrl = (e)=>{
-        const arr =[];
-        arr.push(e.target.value); 
-
-        setFormFields(()=>(
-        {
-            ...formFields,
-            [e.target.name]:arr
-        }
-    ))
-    }
-
     const addCategory = (e)=>{
         e.preventDefault();
 
-        if(formFields.name!=="" && formFields.images.length!==0 && formFields.color!=="" ){
+        fd.append('name',formFields.name);
+        fd.append('color',formFields.color);
+
+        if(formFields.name!==""  && formFields.color!=="" ){
             setIsLoading(true);
 
 
@@ -91,6 +116,30 @@ const ProductUpload = () => {
             return false;
         }
     }
+
+    const onChangefile = async(e, apiEndPoint)=>{
+    try{
+        const imgArr = [];
+        const files = e.target.files;
+        setImageFiles(e.target.files)
+
+        //const fd = new formData();
+
+        for(var i =0;i<files.length;i++){
+            const file=files[i];
+            imgArr.push(file);
+            fd.append(`images`,file);
+        }
+        setFiles(imgArr);
+        console.log(imgArr);
+         postData(apiEndPoint,fd).then((res)=>{
+           
+        });
+    }catch(error){
+        console.log(error)
+    }
+  }
+
     
 
  return(
@@ -128,24 +177,48 @@ const ProductUpload = () => {
                             <h6>Category Name</h6>
                             <input type='text' name='name' onChange={changeInput}/>  
                         </div>
-                        <div className='form-group'>
-                            <h6>Image Url</h6>
-                            <input type='text' name='images' onChange={addImgUrl}/>  
-                        </div>
+                        
                         <div className='form-group'>
                             <h6>Color</h6>
                             <input type='text' name='color' onChange={changeInput}/>  
                         </div>
-
-                    </div>
-                    <div className='card p-4 mt-0'>
-                <br/>
-
-                    <Button type='submit' className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
-                    {isLoading === true ? <CircularProgress color="inherit" className='loader'/> : 'PUBLISH AND VIEW'}</Button>
                 
-                    </div>
+                         <div className='form-group'>
+                            <div className='imagesUploadSec'>
+                                 <h6 class="mb-4">Media and Published</h6>
+
+                                <div className='imgUploadBox d-flex align-items-center'>
+                                    {
+                                        previews?.length !==0 && previews?.map((img,index)=>{
+                                            return(
+                                                <div className='uploadBox' key={index}>
+                                                    <img src={img} className='w-100' alt='img'/>
+                                                </div>
+                                                
+                                            )
+                                        })
+                                    }
+                                    
+                                    <div className='uploadBox'>
+                                        <input type='file' multiple onChange={(e)=> onChangefile(e, '/api/category/upload')} name='images'/>
+                                        <div className='info'>
+                                            <FaRegImages/>
+                                            <h5>image upload</h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <Button type='submit' onClick={addCategory} className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
+                                {isLoading === true ? <CircularProgress color="inherit" className='loader'/> : 'PUBLISH AND VIEW'}</Button>
+                            </div>
                 </div>
+
+                    </div>
+                    {/* <div className='card p-4 mt-0'>
+                    </div> */}
+                </div>
+                
             </div>
         </form>
       </div>

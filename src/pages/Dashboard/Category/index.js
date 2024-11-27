@@ -207,7 +207,7 @@ const Category = () => {
                             <div className="d-flex align-items-center productBox">
                               <div className="imgWrapper">
                                 <div className="img">
-                                  <img src={item.images[0]} alt="" className="w-100"/>
+                                  <img src={`${context.baseUrl}/uploads/${item.images[0]}`} alt="img" className="w-100"/>
                                 </div>
                               </div>
                             </div>

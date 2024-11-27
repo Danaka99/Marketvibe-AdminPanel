@@ -4,7 +4,7 @@ import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { FaCloudUploadAlt } from "react-icons/fa";
 //import { IoCloseSharp } from 'react-icons/io5'; 
@@ -15,7 +15,6 @@ import { fetchDataFromApi, postData } from '../../utils/api';
 import { MyContext } from '../../App';
 import CircularProgress from '@mui/material/CircularProgress';
 import { FaRegImages } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
     
@@ -53,10 +52,9 @@ const ProductUpload = () => {
 
     const [imagefiles,setImageFiles] = useState();
     const [previews,setPreviews] = useState();
-    const history = useNavigate();
 
     // const [count, setCount] = useState(0);
-    // const[productImagesArr, setproductImageArr]= useState([]); 
+    const[productImagesArr, setproductImageArr]= useState([]); 
 
     const [formFields,setFormFields]= useState({
         name:'',
@@ -64,13 +62,13 @@ const ProductUpload = () => {
         brand:'',
         price:null,
         oldPrice:null,
-        category:'',
+        Category:'',
         CountInStock:null,
         rating:0,
         isFeatured:null,
     })
 
-    // const productImages= useRef();
+    const productImages= useRef();
     const context = useContext(MyContext);
     const fd= new FormData();
 
@@ -118,6 +116,36 @@ const ProductUpload = () => {
     }))
     };
 
+    
+    // const addProductImages=()=>{
+
+    //    const arr=[];
+    //    const imgGrid = document.querySelector('#imgGrid');
+
+    //    const imgData = `<div class="img">
+    //                     <img src="${productImages.current.value}" alt="image
+    //                     class="w-100 fit-image" 
+    //                     style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
+    //                     </div>`;
+    //     arr[parseInt(count)]=productImages.current.value;
+    //     setCount(count+1);
+        
+    //     setFormFields(()=>({
+    //     ...formFields,
+    //     images:arr
+    // }))
+
+
+    //     imgGrid.insertAdjacentHTML('beforeend' , imgData);
+    //     productImages.current.value="";                
+    // }
+
+  const addProductImages = () =>{
+     setproductImageArr(prevArray => [...prevArray,productImages.current.value]);
+     productImages.current.value="";
+  }
+  
+
   const inputChange=(e)=>{
     setFormFields(()=>({
         ...formFields,
@@ -138,7 +166,7 @@ const ProductUpload = () => {
         }
         setFiles(imgArr);
 
-        await postData(apiEndPoint,fd).then((res)=>{
+        postData(apiEndPoint,fd).then((res)=>{
             console.log(res)
         });
     }catch(error){
@@ -158,7 +186,8 @@ const ProductUpload = () => {
     fd.append('CountInStock',formFields.CountInStock);
     fd.append('rating',formFields.rating);
     fd.append('isFeatured',formFields.isFeatured);
-    
+
+
     if(formFields.name===""){
         context.setAlertBox({
             open:true,
@@ -240,6 +269,14 @@ const ProductUpload = () => {
         return false;
     }
 
+    // if(formFields.images.length===0){
+    //     context.setAlertBox({
+    //         open:true,
+    //         msg:'Please add product images',
+    //         error:true
+    //     });
+    //     return false;
+    // }
     setIsLoading(true);
     
     postData('/api/products/create',formFields).then((res)=>{
@@ -261,13 +298,15 @@ const ProductUpload = () => {
         rating:0,
         isFeatured:false,
         images:[]
-        });
-        history('/products');
+        })
         
     })
-
   }
 
+//   const addProduct=(e)=>{
+//     e.preventDefault(formFields);
+//     console.log(formFields);
+//   }
 
   return (
     <>
@@ -407,7 +446,65 @@ const ProductUpload = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* <div className='row'>
+                            <div className='col'>
+                                <div className='form-group'>
+                                    <h6>Product Images</h6>
+                                    <div className='position-relative inputBtn'>
+                                        <input type='text'  required ref={productImages} name='images' onChange={inputChange}/>
+                                        <Button type='button' className='btn-blue'  
+                                        onClick={addProductImages}>Add</Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
+
                     </div>
+                    {/* <div className='card p-4 mt-0'>
+                            <div className='imagesUploadSec'>
+                                <h5 class="mb-4">Media and Published</h5><br/>
+
+                                {/* <div className='imgUploadBox d-flex align-items-center'>
+                                    <div className='uploadBox'>
+                                    <span className='remove'>
+                                            <IoCloseSharp/>
+                                    </span>
+                                            <div className='box'>
+                                            <div className='imgGrid d-flex' id='imgGrid'>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div> */}
+
+                                {/* <div className='stickyBox'>
+                                    <div className='imgGrid d-flex' id='imgGrid'>
+                                    </div>
+                                </div> */}
+                                {/* <div className='stickyBox'>
+                                    {
+                                        productImagesArr?.length !==0 && 
+                                        <h4>Product Images</h4>
+                                    }
+                                    <div className='imgGrid d-flex' id='imgGrid'>
+                                        {
+                                        productImagesArr?.map((image, index) => (
+                                            <div className='img' key={index}>
+                                            <img src={image} alt="images" className='w-100' />
+                                            </div>
+                                        ))
+                                        }
+                                    </div>
+                            </div>
+                                
+                <br/>
+                
+                <Button type='submit' onClick={addProduct} className='btn-blue btn-lg btn-big w-100'><FaCloudUploadAlt/>&nbsp;&nbsp;
+                {isLoading === true ? <CircularProgress color="inherit" className='loader'/> : 'PUBLISH AND VIEW'}</Button>
+                
+                      </div> */}
+                    {/* </div>  */}
                 </div>
 
                 <div className='col-sm-12 card p-4 mt-0'>
@@ -426,8 +523,18 @@ const ProductUpload = () => {
                                 })
                             }
                             
+
+                            {/* <div className='uploadBox'>
+                                <img src='https://mironcoder-hotash.netlify.app/images/product/single/01.webp' className='w-100' alt=''/>
+                            </div>
                             <div className='uploadBox'>
-                                <input type='file' multiple onChange={(e)=> onChangefile(e, '/api/products/upload')} name='images'/>
+                                <img src='https://mironcoder-hotash.netlify.app/images/product/single/01.webp' className='w-100' alt=''/>
+                            </div>
+                            <div className='uploadBox'>
+                                <img src='https://mironcoder-hotash.netlify.app/images/product/single/01.webp' className='w-100' alt=''/>
+                            </div> */}
+                            <div className='uploadBox'>
+                                <input type='file' multiple onChange={(e)=> onChangefile(e, 'api/products/upload')} name='images'/>
                                 <div className='info'>
                                     <FaRegImages/>
                                     <h5>image upload</h5>

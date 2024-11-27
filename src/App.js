@@ -31,6 +31,7 @@ function App() {
   const [windowWidth,setWindowWidth] = useState(window.innerWidth);
   const [themeMode,setThemeMode] = useState(true);
   const [isOpenNav,setIsOpenNav] = useState(false);
+  const [baseUrl,setBaseUrl]=useState(" http://localhost:4001/");
 
   const [progress, setProgress] = useState(0);
 
@@ -95,7 +96,9 @@ function App() {
     setIsOpenNav,
     alertBox,
     setAlertBox,
-    setProgress
+    setProgress,
+    baseUrl,
+    setBaseUrl
   }
 
   return (

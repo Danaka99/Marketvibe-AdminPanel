@@ -3,6 +3,7 @@ import { emphasize, styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
 import React, { useContext } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import Button from "@mui/material/Button";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -11,6 +12,12 @@ import { useEffect, useState } from 'react';
 import { deleteData, editData, fetchDataFromApi } from '../../../utils/api';
 import { Checkbox } from '@mui/material';
 import { Link } from "react-router-dom";
+
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { MyContext } from '../../../App';
 
 //breadcrumb code
@@ -42,6 +49,7 @@ const Category = () => {
   const [open, setOpen] = React.useState(false);
   
   const [editId, setEditId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formFields,setFormFields]=useState({
         name:'',
@@ -63,6 +71,32 @@ const Category = () => {
   }, []);
 
 
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+    const changeInput = (e) =>{
+    setFormFields(()=>(
+        {
+            ...formFields,
+            [e.target.name]:e.target.value
+        }
+    ))
+    }
+
+    const addImgUrl = (e)=>{
+        const arr =[];
+        arr.push(e.target.value); 
+
+        setFormFields(()=>(
+        {
+            ...formFields,
+            [e.target.name]:arr
+        }
+    ))
+    }
+
   const editCategory=(id)=>{
     setFormFields({
         name:'',
@@ -81,6 +115,30 @@ const Category = () => {
       console.log(res);
     })
 
+  }
+
+  const categoryEditFun=(e)=>{
+    e.preventDefault();
+    setIsLoading(true);
+
+    context.setProgress(40);
+    editData(`/api/category/${editId}` , formFields).then((res)=>{
+      
+      fetchDataFromApi('/api/category').then((res)=>{
+      setCatData(res);
+      setOpen(false);
+      setIsLoading(false);
+    });
+
+    context.setAlertBox({
+      open:true,
+      error:false,
+      msg:'the category updated!'
+    });
+
+    context.setProgress(100);
+
+    })
   }
 
   const deleteCat=(id)=>{
@@ -162,9 +220,7 @@ const Category = () => {
                           
                           <td>
                             <div className="actions d-flex align-items-center">
-                              <Link to={`/category/edit/${item.id}`}>
-                              <Button className="success" color="success"><FaPencilAlt/></Button>
-                              </Link>
+                              <Button className="success" color="success" onClick={()=>editCategory(item.id)}><FaPencilAlt/></Button>
                               <Button className="error" color="error" onClick={()=>deleteCat(item.id)}><MdDelete/></Button>
                             </div>
                           </td>
@@ -190,7 +246,67 @@ const Category = () => {
 
           </div>
       </div>
-      
+      <Dialog
+        className='editModal'
+        open={open}
+        onClose={handleClose}
+      >
+        <form>
+        <DialogTitle>Edit Category</DialogTitle>
+        <DialogContent>
+          <div className='form-group mb-3'>
+            <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="name"
+            label="Category Name"
+            type="text"
+            fullWidth
+            value={formFields.name}
+            onChange={changeInput}
+          />
+          </div>
+
+          <div className='form-group mb-3'>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="images"
+            name="images"
+            label="Category Image"
+            type="text"
+            fullWidth
+            value={formFields.images}
+            onChange={addImgUrl}
+          />
+          </div>
+
+          <div className='form-group mb-3'>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="color"
+            name="color"
+            label="Category Color"
+            type="text"
+            fullWidth
+            value={formFields.color}
+            onChange={changeInput}
+          />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+          <Button type="button" onClick={categoryEditFun} variant='contained'>
+           {isLoading === true ? <CircularProgress color="inherit" className='loader'/> : 'Submit'}
+          </Button>
+        </DialogActions>
+        </form>
+      </Dialog>
     </>
   );
 }

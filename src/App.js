@@ -13,13 +13,18 @@ import Signup from './pages/Signup';
 import ProductDetails from './pages/ProductDetails';
 import Products from './pages/Dashboard/components/Products';
 import Category from './pages/Dashboard/Category';
-import ProductUpload from './pages/ProductUpload';
+import SubCategoryList from'./pages/Dashboard/Category/subCategoryList'
+import ProductUpload from './pages/ProductUpload/addproduct';
+import ProductEdit from './pages/ProductUpload/editproduct';
 import SellerAcount from './pages/SellerAccount';
 import ManagedAccount from './pages/ManagedAccount';
-import CategoryAdd from './pages/CategoryAdd';
+import CategoryAdd from './pages/Dashboard/Category/addCategory';
+import AddSubCatogory from'./pages/Dashboard/Category/addSubCat'
+import CategoryEdit from './pages/Dashboard/Category/editCategory';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import LoadingBar from 'react-top-loading-bar'
+import { fetchDataFromApi } from './utils/api';
 
 const MyContext = createContext();
 
@@ -32,6 +37,7 @@ function App() {
   const [themeMode,setThemeMode] = useState(true);
   const [isOpenNav,setIsOpenNav] = useState(false);
   const [baseUrl,setBaseUrl]=useState("http://localhost:4001");
+  const [catData,setCatData]=useState([]);
 
   const [progress, setProgress] = useState(0);
 
@@ -64,6 +70,14 @@ function App() {
   };
   });
 
+  useEffect(()=>{
+    setProgress(40);
+    fetchDataFromApi('/api/category').then((res)=>{
+      setCatData(res);
+      setProgress(100);
+    })
+  },[])
+
   const openNav=()=>{
     setIsOpenNav(true);
   }
@@ -81,6 +95,13 @@ function App() {
     });
   };
 
+  const fetchCategory=()=>{
+    fetchDataFromApi('/api/category').then((res)=>{
+      setCatData(res);
+      setProgress(100);
+    })
+  }
+
   const values={
     isToggleSidebar,
     setIsToggleSidebar,
@@ -97,7 +118,9 @@ function App() {
     alertBox,
     setAlertBox,
     setProgress,
-    baseUrl
+    baseUrl,
+    catData,
+    fetchCategory
   }
 
   return (
@@ -144,10 +167,14 @@ function App() {
         <Route path='/products' exact={true} element={<Products />} />
         <Route path='/product/details' exact={true} element={<ProductDetails />} />
         <Route path='/product/upload' exact={true} element={<ProductUpload />} />
+        <Route path='/product/edit/:id' exact={true} element={<ProductEdit />} />
         <Route path='/seller' exact={true} element={<SellerAcount />} />
         <Route path='/managedaccount' exact={true} element={<ManagedAccount />} />
-        <Route path='/category/add' exact={true} element={<CategoryAdd />} />
         <Route path='/category' exact={true} element={<Category/>} />
+        <Route path='/category/edit/:id' exact={true} element={<CategoryEdit />} />
+        <Route path='/category/add' exact={true} element={<CategoryAdd />} />
+        <Route path='/subCategory' exact={true} element={<SubCategoryList />} />
+        <Route path='/subCategory/add' exact={true} element={<AddSubCatogory />} />
       </Routes>
       </div>
     </div>

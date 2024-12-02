@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from 'react';
 import { deleteData, fetchDataFromApi } from '../../../../utils/api';
 import { MyContext } from '../../../../App';
 import Rating from '@mui/material/Rating';
+import { Link } from 'react-router-dom';
 
 
 
@@ -58,7 +59,7 @@ const Products = () => {
       context.setProgress(100);
       context.setAlertBox({
         open:true,
-        error:true,
+        error:false,
         msg:'Product Deleted!'
       });
       fetchDataFromApi("/api/products").then((res)=>{
@@ -66,6 +67,14 @@ const Products = () => {
     })
     })
   }
+
+  const handleChange = (event,value)=>{
+  context.setProgress(40);
+  fetchDataFromApi(`/api/products?page=${value}`).then((res)=>{
+    setProductList(res);
+    context.setProgress(100);
+  })
+ };
 
   return (
     <>
@@ -109,7 +118,7 @@ const Products = () => {
               </thead>
               <tbody>
                 {
-                  productList?.length!==0 && productList?.map((item,index)=>{
+                  productList?.products?.length!==0 && productList?.products?.map((item,index)=>{
                     return(
                       <tr>
                     <td>#{index+1}</td>
@@ -141,7 +150,9 @@ const Products = () => {
                     <td>
                       <div className="actions d-flex align-items-center">
                         <Button className="secondary" color="secondary"><FaEye/></Button>
+                        <Link to={`/product/edit/${item.id}`}>
                         <Button className="success" color="success"><FaPencilAlt/></Button>
+                        </Link>
                         <Button className="error" color="error" onClick={()=>deleteProduct(item._id)}><MdDelete/></Button>
                       </div>
                     </td>
@@ -152,11 +163,14 @@ const Products = () => {
                 }
               </tbody>
             </table>
-             <div className="d-flex tableFooter">
-              <p>showing <b>12</b> of <b>60</b> results</p>
-              <Pagination count={100} color="primary" className="pagination"
-              showFirstButton showLastButton/>
+             {
+              productList?.totalPages > 1 && 
+              <div className="d-flex tableFooter">
+              {/* <p>showing <b>12</b> of <b>60</b> results</p> */}
+              <Pagination count={productList?.totalPages} color="primary" className="pagination"
+              showFirstButton showLastButton onChange={handleChange}/>
              </div>
+             }
           </div>
 
           </div>

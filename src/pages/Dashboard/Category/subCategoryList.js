@@ -2,16 +2,16 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { emphasize, styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
-import React, { useContext } from 'react';
 import Button from "@mui/material/Button";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Pagination from '@mui/material/Pagination';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import { deleteData, editData, fetchDataFromApi } from '../../../utils/api';
 import { Checkbox } from '@mui/material';
 import { Link } from "react-router-dom";
 import { MyContext } from '../../../App';
+
 
 //breadcrumb code
 const StyledBreadcrumb = styled(Chip)(({theme})=>{
@@ -36,18 +36,9 @@ const StyledBreadcrumb = styled(Chip)(({theme})=>{
     };
 });
 
-const Category = () => {
+const SubCategoryList = () => {
 
-  const [catData, setCatData] = useState([]); 
-  const [open, setOpen] = React.useState(false);
-  
-  const [editId, setEditId] = useState(null);
-
-  const [formFields,setFormFields]=useState({
-        name:'',
-        images:[],
-        color:''
-    });
+  const [subCatData, setSubCatData] = useState([]); 
 
   const context=useContext(MyContext);
 
@@ -55,46 +46,46 @@ const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     context.setProgress(20);
-    fetchDataFromApi('/api/category').then((res) => {
-      setCatData(res);
+    fetchDataFromApi('/api/subCat').then((res) => {
+      setSubCatData(res);
       console.log(res);
       context.setProgress(100);
     });
   }, []);
 
 
-  const editCategory=(id)=>{
-    setFormFields({
-        name:'',
-        images:'',
-        color:''
-      });
-    setOpen(true);
-    setEditId(id);
+  // const editCategory=(id)=>{
+  //   setFormFields({
+  //       name:'',
+  //       images:'',
+  //       color:''
+  //     });
+  //   setOpen(true);
+  //   setEditId(id);
 
-     fetchDataFromApi(`/api/category/${id}`).then((res)=>{
-      setFormFields({
-        name:res.name,
-        images:res.images,
-        color:res.color
-      });
-      console.log(res);
-    })
+  //    fetchDataFromApi(`/api/subCat/${id}`).then((res)=>{
+  //     setFormFields({
+  //       name:res.name,
+  //       images:res.images,
+  //       color:res.color
+  //     });
+  //     console.log(res);
+  //   })
 
-  }
+  // }
 
   const deleteCat=(id)=>{
-    deleteData(`/api/category/${id}`).then(res=>{
-      fetchDataFromApi('/api/category').then((res)=>{
-      setCatData(res);
+    deleteData(`/api/subCat/${id}`).then(res=>{
+      fetchDataFromApi('/api/subCat').then((res)=>{
+      setSubCatData(res);
     })
   })
  }
 
  const handleChange = (event,value)=>{
   context.setProgress(40);
-  fetchDataFromApi(`/api/category?page=${value}`).then((res)=>{
-    setCatData(res);
+  fetchDataFromApi(`/api/subCat?page=${value}`).then((res)=>{
+    setSubCatData (res);
     context.setProgress(100);
   })
  };
@@ -104,7 +95,7 @@ const Category = () => {
     <>
       <div className='right-content w-100'>
         <div className='card shadow border-0 w-100 flex-row p-4 justify-content-between align-items-center'>
-            <h5 className='mb-0'>Category List</h5>
+            <h5 className='mb-0'>Sub Category List</h5>
 
             <div className='ml-auto d-flex align-items-center'>
             <Breadcrumbs aria-label='breadcrumb' className='ml-auto breadcrumbs_'>
@@ -116,13 +107,13 @@ const Category = () => {
             />
 
             <StyledBreadcrumb
-            label="Category"
+            label=" Sub Category"
             component="a"
             href="#"
             />
 
             </Breadcrumbs>&nbsp;&nbsp;&nbsp;&nbsp;
-            <Link to="/category/add"><Button className='btn-blue ml-3 pl-3 pr-5'> Add Category</Button></Link>
+            <Link to="/subCategory/add"><Button className='btn-blue ml-3 pl-3 pr-5'> Add Sub Category</Button></Link>
             </div>
         </div>
         <div className="card shadow border-0 p-3 mt-4">
@@ -133,36 +124,35 @@ const Category = () => {
               <thead className="thead-dark">
                   <tr>
                     <th>U_ID</th>
-                    <th style={{width:'100px'}}>CATEGORY</th>
-                    <th>IMAGE</th>
-                    <th>COLOR</th> 
+                    <th>CATEGORY</th>
+                    <th>SUB CATEGORY</th>
+                    {/* <th style={{width:'100px'}}>SUB CATEGORY</th> */}
+                    <th style={{width:'300px'}}>CATEGORY IMAGE</th>
                     <th>ACTIONS</th>
                   </tr>
               </thead>
               <tbody>
                 {
-                  catData?.categoryList?.length!==0 && catData?.categoryList?.map((item,index)=>{
+                  subCatData?.subCategoryList?.length !==0 && subCatData?.subCategoryList?.map((item,index)=>{
                     return(
                          <tr>
                           <td><Checkbox className='AddCatCheckBox'/>#{index+1}</td>
+                          <td>{item.category.name}</td>
+                          <td>
+                            {item.subCat}
+                          </td>
                           <td>
                             <div className="d-flex align-items-center productBox">
                               <div className="imgWrapper">
                                 <div className="img">
-                                  <img src={`${context.baseUrl}/uploads/${item.images[0]}`} alt="img" className="w-100"/>
+                                  <img src={`${context.baseUrl}/uploads/${item.category.images[0]}`} alt="img" className="w-100"/>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td>{item.name}</td>
-                          <td>
-                            {/* <span className='dot'style={{background:item.color}}></span> */}
-                            {item.color}
-                          </td>
-                          
                           <td>
                             <div className="actions d-flex align-items-center">
-                              <Link to={`/category/edit/${item.id}`}>
+                              <Link to={`/subCategory/edit/${item.id}`}>
                               <Button className="success" color="success"><FaPencilAlt/></Button>
                               </Link>
                               <Button className="error" color="error" onClick={()=>deleteCat(item.id)}><MdDelete/></Button>
@@ -177,12 +167,9 @@ const Category = () => {
               </tbody>
             </table>
              {
-              catData?.totalPages > 1 &&
+              subCatData?.totalPages > 1 &&
               <div className="d-flex tableFooter">
-              {/* <p>showing <b>{page}</b> of <b>{catData?.length}</b> results</p> */}
-              {/* <Pagination count={page} color="primary" className="pagination"
-              showFirstButton showLastButton/> */}
-               <Pagination count={catData?.totalPages} color="primary" className="pagination"
+               <Pagination count={subCatData?.totalPages} color="primary" className="pagination"
               showFirstButton showLastButton onChange={handleChange}/>
              </div>
              }
@@ -195,4 +182,4 @@ const Category = () => {
   );
 }
 
-export default Category;
+export default SubCategoryList;

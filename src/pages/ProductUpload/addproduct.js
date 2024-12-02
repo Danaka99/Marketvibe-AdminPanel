@@ -50,6 +50,7 @@ const ProductUpload = () => {
     const [catData, setCatData] = useState([]); 
     const [isLoading, setIsLoading] = useState(false);
     const [files, setFiles]= useState([]);
+    const [isSelectedFiles, setIsSelectedFiles]=useState(false);
 
     const [imagefiles,setImageFiles] = useState();
     const [previews,setPreviews] = useState();
@@ -76,12 +77,7 @@ const ProductUpload = () => {
 
     useEffect(() => {
     window.scrollTo(0,0);
-    context.setProgress(20);
-
-    fetchDataFromApi('/api/category').then((res) => {
-        setCatData(res);
-        context.setProgress(100);
-    })
+    setCatData(context.catData);
     
     },[]);
 
@@ -125,24 +121,48 @@ const ProductUpload = () => {
     }))
   }
 
-  const onChangefile = async(e, apiEndPoint)=>{
+    const onChangefile = async(e, apiEndPoint)=>{
     try{
         const imgArr = [];
         const files = e.target.files;
-        setImageFiles(e.target.files)
         //const fd = new formData();
-        for(var i =0;i<files.length;i++){
-            const file=files[i];
-            imgArr.push(file);
-            fd.append(`images`,file);
-        }
-        setFiles(imgArr);
 
-        await postData(apiEndPoint,fd).then((res)=>{
-            console.log(res)
-        });
-    }catch(error){
-        console.log(error)
+        for(var i =0;i<files.length;i++){
+
+            if(files[i] && (files[i].type==='image/jpeg'||files[i].type ==='image/jpg' ||files[i].type ==='image/png')){
+                setImageFiles(e.target.files)
+
+                const file=files[i];
+                imgArr.push(file);
+                fd.append(`images`,file);
+
+                setFiles(imgArr);
+               
+                }
+                else{
+                    context.setAlertBox({
+                    open:true,
+                    error:true,
+                    msg:"please select a valid JPG or PNG image file!"
+                })
+                }
+                }
+
+                setIsSelectedFiles(true);
+
+                setFiles(imgArr);
+                console.log(imgArr);
+
+                postData(apiEndPoint,fd).then((res)=>{
+                    context.setAlertBox({
+                        open:true,
+                        error:false,
+                        msg:"image uploaded!"
+                    })
+                });
+            
+        }catch(error){
+         console.log(error)
     }
   }
 
@@ -325,7 +345,7 @@ const ProductUpload = () => {
                                     <em value={null}>None</em>
                                 </MenuItem>
                                 {
-                                    catData?.categoryList?.length !== 0 && catData?.categoryList?.map((cat,index)=>{
+                                    context.catData?.categoryList?.length !== 0 && context.catData?.categoryList?.map((cat,index)=>{
                                         return(
                                              <MenuItem value={cat.id} key={index}>{cat.name}</MenuItem>
                                         )

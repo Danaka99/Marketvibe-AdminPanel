@@ -158,7 +158,7 @@ const SubCategory = () => {
                             </div>
                           </td>
                           <td>{item.name} </td>
-                          <td>
+                          <td className="SubCat_">
                             {item?.children?.length !== 0 &&
                               item?.children?.map((subCat, index) => {
                                 return (

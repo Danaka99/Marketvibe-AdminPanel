@@ -589,6 +589,12 @@ body.dark .imgUploadBox .uploadBox .info h5 {
 body.dark .MuiPaper-elevation{
   background-color: #000 !important;
 }
+body.light .badge{
+  color: #000 !important;
+  opacity: 0.6;
+  font-size: 12px;
+  font-weight: 0px;
+}
 
 .imgUploadBox .uploadBox .box{width: 100%; height: 150px !important; overflow: hidden;position: relative;}
 .imgUploadBox .uploadBox .box .lazy-load-image-background{ padding: 2.5px; height: 100% !important;width: 100% !important;}

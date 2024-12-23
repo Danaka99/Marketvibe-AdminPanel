@@ -35,6 +35,14 @@ const Header = () => {
   const openMyAcc = Boolean(anchorEl);
   const openNotification = isOpenNotificationDrop;
 
+  const changeTheme = () => {
+    if (context.theme === "dark") {
+      context.setTheme("light");
+    } else {
+      context.setTheme("dark");
+    }
+  };
+
   
 
   const handleOpenMyAccDrop = (event) => {
@@ -87,10 +95,12 @@ const Header = () => {
               <Button className="rounded-circle mr-3 normal-hide" onClick={() => context.openNav()}>
                 <IoMdMenu />
               </Button>
-              <Button className="rounded-circle mr-3" onClick={() => context.setThemeMode(!context.themeMode)}>
-                {
-                  context.themeMode ? <MdDarkMode /> : <MdLightMode />
-                }
+              <Button className="rounded-circle mr-3" onClick={changeTheme}>
+                {context.theme === "light" ? (
+                  <MdDarkMode />
+                ) : (
+                  <MdLightMode />
+                )}
               </Button>
               
               <Button className="rounded-circle mr-3 res-hide">

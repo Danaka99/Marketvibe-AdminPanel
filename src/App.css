@@ -86,6 +86,10 @@ body.dark header button.rounded-circle:hover svg{color: #292929 !important; tran
 
 header .part2{padding-left: 50px;}
 
+.headerSearchWrapper {
+  width: 58%;
+}
+
 .searchBox{width: 600px; height: 40px; background: #f0f5ff; border-bottom: 6px; padding: 3px 15px;}
 body.dark .searchBox{background: #4c5432;}
 
@@ -536,7 +540,22 @@ body.light .reviewForm textarea::--webkit-input-placeholder{color: rgba(0,0,0,0.
 
 
 
+.breadcrumbs_ a:hover {
+  text-decoration: none !important;
+}
 
+body.dark .breadcrumbs_ a {
+  background-color:  #292929 !important;
+}
+
+body.dark .breadcrumbs_ a * {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.dark .breadcrumbs_ li .MuiChip-filled {
+  background-color: #292929 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
 
 
 .form .form-group{margin-bottom: 25px;}
@@ -560,6 +579,16 @@ body.dark .imgUploadBox .uploadBox{border: 1px dashed #292929 !important;}
  pointer-events: none;}
 .imgUploadBox .uploadBox .info{font-size: 50px; opacity: 0.2;}
 .imgUploadBox .uploadBox .info h5{font-size: 15px; text-align: center; opacity: 0.9;}
+body.dark .imgUploadBox .uploadBox .info h5 {
+  color: #000 !important;
+  font-size: 15px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+body.dark .MuiPaper-elevation{
+  background-color: #000 !important;
+}
 
 .imgUploadBox .uploadBox .box{width: 100%; height: 150px !important; overflow: hidden;position: relative;}
 .imgUploadBox .uploadBox .box .lazy-load-image-background{ padding: 2.5px; height: 100% !important;width: 100% !important;}
